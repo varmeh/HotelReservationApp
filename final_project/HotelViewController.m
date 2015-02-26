@@ -8,6 +8,7 @@
 
 #import "HotelViewController.h"
 #import <MapKit/MapKit.h>
+#import "HotelTableViewCell.h"
 
 @interface HotelViewController ()
 {
@@ -25,12 +26,17 @@
     
     [self addChildToNavigationBar];
     [self addChildToToolBar];
-    
+    [self addChildViewToScrollbar];
+}
+
+- (void)addChildViewToScrollbar {
     //Adding table & map view to scroll bar
     CGRect frame = self.view.frame;
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height) style:UITableViewStylePlain];
     tableView.delegate = self;
     tableView.dataSource = self;
+    //register table view cell
+    [tableView registerNib:[UINib nibWithNibName:@"HotelTableViewCell" bundle:nil] forCellReuseIdentifier:@"hotelCell"];
     
     MKMapView *mapView = [[MKMapView alloc] initWithFrame:CGRectMake(frame.size.width, 0, frame.size.width, frame.size.height)];
     
@@ -56,9 +62,9 @@
     searchBar.tintColor = [UIColor blueColor];
     
     //add button for date picker
-    UIBarButtonItem *calender = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"calendar"] style:UIBarButtonItemStylePlain target:self action:@selector(displayCalendar)];
+    UIBarButtonItem *calender = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"calendar"] style:UIBarButtonItemStylePlain target:self action:@selector(displayCalendar:)];
     
-    UIBarButtonItem *people = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"user_male_filled"] style:UIBarButtonItemStylePlain target:self action:@selector(selectNoOfUsers)];
+    UIBarButtonItem *people = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"user_male_filled"] style:UIBarButtonItemStylePlain target:self action:@selector(selectNoOfUsers:)];
     
     self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:people, calender, nil];
     self.navigationItem.titleView = searchBar;
@@ -67,11 +73,11 @@
 
 - (void) addChildToToolBar {
     //Adding items to toolbar
-    UIBarButtonItem *sort = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"generic_sorting"] style:UIBarButtonItemStylePlain target:self action:@selector(showSortView)];
+    UIBarButtonItem *sort = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"generic_sorting"] style:UIBarButtonItemStylePlain target:self action:@selector(showSortView:)];
     
-    UIBarButtonItem *filter = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"filter"] style:UIBarButtonItemStylePlain target:self action:@selector(showFilterView)];
+    UIBarButtonItem *filter = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"filter"] style:UIBarButtonItemStylePlain target:self action:@selector(showFilterView:)];
     
-    UIBarButtonItem *toggleDataView = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"geo_fence"] style:UIBarButtonItemStylePlain target:self action:@selector(toggleMainView)];
+    UIBarButtonItem *toggleDataView = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"map_marker"] style:UIBarButtonItemStylePlain target:self action:@selector(toggleMainView:)];
     
     //UIBarButtonSystemItemFlexibleSpace is used to evenly place items on a tool bar. Check their addition in toolBarHotelScreenOutlet.
     UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
@@ -84,43 +90,57 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
+    return 10;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"hotelCell" forIndexPath:indexPath];
+    HotelTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"hotelCell" forIndexPath:indexPath];
     
     return cell;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 85.0;
+}
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self performSegueWithIdentifier:@"segueHotelDetail" sender:self];
+}
 
-- (void)displayCalendar {
+- (IBAction)displayCalendar:(id)sender {
     
 }
 
-- (void)selectNoOfUsers {
+- (IBAction)selectNoOfUsers:(id)sender {
     
 }
 
-- (void)showSortView {
+- (IBAction)showSortView:(id)sender {
     
 }
 
-- (void) showFilterView {
+- (IBAction)showFilterView:(id)sender {
     
 }
 
-- (void) toggleMainView {
+- (IBAction)toggleMainView:(UIBarButtonItem *)sender {
     //The change in content size ensures no horizontal dragging from table view to map view.
     //draging in map view anyways result in moving to new areas.
     if (isMapView) {
         [self.scrollBarOutlet setContentSize:CGSizeMake(self.view.frame.size.width, self.view.frame.size.height)];
         [self.scrollBarOutlet setContentOffset:CGPointMake(0, 0) animated:YES];
+        [sender setImage:[UIImage imageNamed:@"map_marker"]];
     } else {
         [self.scrollBarOutlet setContentSize:CGSizeMake(self.view.frame.size.width*2, self.view.frame.size.height)];
         [self.scrollBarOutlet setContentOffset:CGPointMake(self.view.frame.size.width, 0) animated:YES];
+        [sender setImage:[UIImage imageNamed:@"align_justify"]];
     }
     isMapView = !isMapView;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([[segue identifier] isEqualToString:@"segueHotelDetail"]) {
+        [segue.destinationViewController setTitle:@"Hotel"];
+    }
 }
 @end

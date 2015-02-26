@@ -39,11 +39,51 @@
                     <connections>
                         <outlet property="scrollBarOutlet" destination="ahM-jh-HTq" id="DFy-xN-BaX"/>
                         <outlet property="toolBarHotelScreenOutlet" destination="jwF-Gs-cRl" id="wtN-Rg-gwM"/>
+                        <segue destination="Sjb-Yu-Wrh" kind="show" identifier="segueHotelDetail" id="tat-O4-D0b"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1115" y="986"/>
+        </scene>
+        <!--Hotel Detail View Controller-->
+        <scene sceneID="nAZ-66-BpI">
+            <objects>
+                <viewController id="Sjb-Yu-Wrh" customClass="HotelDetailViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="T34-al-Jyz"/>
+                        <viewControllerLayoutGuide type="bottom" id="arO-Vc-gJk"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="YCt-BN-ohS">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="5VQ-yz-w1k" kind="show" identifier="segueBook" id="NSC-j7-GPd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7SE-wF-83Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1841" y="986"/>
+        </scene>
+        <!--Booking View Controller-->
+        <scene sceneID="8XP-9P-a9d">
+            <objects>
+                <viewController id="5VQ-yz-w1k" customClass="BookingViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mYn-QL-oU7"/>
+                        <viewControllerLayoutGuide type="bottom" id="LsJ-BY-bZY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="C3l-5A-m9M">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qwz-r8-7Is" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2619" y="986"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="kAV-r1-OqF">
