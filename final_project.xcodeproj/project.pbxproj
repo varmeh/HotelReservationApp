@@ -16,6 +16,7 @@
 		814FA15E1A9A62F600D0266A /* final_projectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 814FA15D1A9A62F600D0266A /* final_projectTests.m */; };
 		8185B3D21A9D934000729A09 /* EANWebFramework.m in Sources */ = {isa = PBXBuildFile; fileRef = 8185B3D11A9D934000729A09 /* EANWebFramework.m */; };
 		81C03F9A1A9EB32F000347E1 /* HotelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C03F991A9EB32F000347E1 /* HotelViewController.m */; };
+		81C03FD01A9EFACF000347E1 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81C03FCF1A9EFACF000347E1 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		8185B3D11A9D934000729A09 /* EANWebFramework.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EANWebFramework.m; sourceTree = "<group>"; };
 		81C03F981A9EB32F000347E1 /* HotelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotelViewController.h; sourceTree = "<group>"; };
 		81C03F991A9EB32F000347E1 /* HotelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotelViewController.m; sourceTree = "<group>"; };
+		81C03FCF1A9EFACF000347E1 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		A15DB5A5C9010082D5D14627 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6E3A9E4FC882462204C13AF /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -54,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81C03FD01A9EFACF000347E1 /* MapKit.framework in Frameworks */,
 				1E9D6BE1DB8ED7BB7992D172 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -143,6 +146,7 @@
 		EB3AC855F0D5924035CC6FA2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				81C03FCF1A9EFACF000347E1 /* MapKit.framework */,
 				A15DB5A5C9010082D5D14627 /* libPods.a */,
 			);
 			name = Frameworks;
