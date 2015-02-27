@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HotelDetailViewController : UIViewController
+@interface HotelDetailViewController : UIViewController <UIScrollViewDelegate>
 
 @end
