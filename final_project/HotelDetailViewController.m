@@ -8,14 +8,14 @@
 
 #import "HotelDetailViewController.h"
 
-#define TOP_INSET_FOR_EXTENDED_IMAGES       50
-#define NAVIGATION_BAR_DEDEUCTION           64
+#define TOP_INSET_FOR_EXTENDED_IMAGES       75
+
 @interface HotelDetailViewController ()
 {
     UIScrollView *imageScroll;
     UIView *imageContainer;
-    CGSize imageScrollOriginalSize;
-    CGSize imageScrollExtendedSize;
+    CGRect imageScrollOriginalFrame;
+    CGRect imageScrollExtendedFrame;
     BOOL isImageScrollBarInOriginalSize;
 }
 @end
@@ -28,26 +28,31 @@
     UIBarButtonItem *selectedHotel = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"checkmark"] style:UIBarButtonItemStylePlain target:self action:@selector(bookHotel:)];
     self.navigationItem.rightBarButtonItem = selectedHotel;
     
+    //Following line ensures that Origin for content view is (0.0, 64.0) w.r.t to main view.
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+
     //Add image scroll bar
     [self addScrollBarForImageList];
     isImageScrollBarInOriginalSize = YES;
 }
 
-
 - (void)addScrollBarForImageList {
-    imageScrollOriginalSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height * (1/3.0));
-    imageScrollExtendedSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height-NAVIGATION_BAR_DEDEUCTION);
+    imageScrollOriginalFrame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height * (1/3.0));
     
-    imageScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, NAVIGATION_BAR_DEDEUCTION, imageScrollOriginalSize.width, imageScrollOriginalSize.height)];
+    CGFloat statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
+    CGFloat navigationBarHeight = self.navigationController.navigationBar.frame.size.height;
+    imageScrollExtendedFrame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - (statusBarHeight + navigationBarHeight));
+    
+    imageScroll = [[UIScrollView alloc] initWithFrame:imageScrollOriginalFrame];
     imageScroll.delegate = self;
     
     //Customize Scrollbar
-    [imageScroll setBackgroundColor:[UIColor blueColor]];
     [imageScroll setShowsHorizontalScrollIndicator:NO];
     [imageScroll setShowsVerticalScrollIndicator:NO];
     [imageScroll setPagingEnabled:YES];
     [imageScroll setBounces:NO];
     [imageScroll setAutoresizesSubviews:YES];
+    [imageScroll setUserInteractionEnabled:YES];
     
     //Adding Gestures to ScrollBar
     UITapGestureRecognizer *singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleFingerTapOnImageScroll:)];
@@ -57,25 +62,25 @@
     UISwipeGestureRecognizer *swipeDown = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeDownImageScroll:)];
     swipeDown.numberOfTouchesRequired = 1;
     swipeDown.direction = UISwipeGestureRecognizerDirectionDown;
-
+    
     UISwipeGestureRecognizer *swipeUp = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeUpImageScroll:)];
-    swipeDown.numberOfTouchesRequired = 1;
-    swipeDown.direction = UISwipeGestureRecognizerDirectionUp;
-
+    swipeUp.numberOfTouchesRequired = 1;
+    swipeUp.direction = UISwipeGestureRecognizerDirectionUp;
+    
     [imageScroll addGestureRecognizer:singleFingerTap];
     [imageScroll addGestureRecognizer:swipeDown];
     [imageScroll addGestureRecognizer:swipeUp];
     
     //All images will be added to container view. It helps to control image size when zooming images
-    imageContainer = [[UIView alloc] initWithFrame:CGRectMake(0, -NAVIGATION_BAR_DEDEUCTION, imageScrollOriginalSize.width, imageScrollOriginalSize.height)];
-    [imageContainer setBackgroundColor:[UIColor redColor]];
+    imageContainer = [[UIView alloc] initWithFrame:imageScrollOriginalFrame];
+    
     //Add code for image array here
-    CGRect imageFrame = CGRectMake(0, 0, imageScrollOriginalSize.width, imageScrollOriginalSize.height);
+    CGRect imageFrame = imageScrollOriginalFrame;
     for (NSInteger i=1 ; i < 2; i++) {
         //?? First line will be replaced by code for image loading
         UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"palace-100"]];
         image.frame = imageFrame;
-
+        
         //Next Property ensures image resizing on resizing of container.
         [image setAutoresizingMask:UIViewAutoresizingFlexibleHeight];
         
@@ -86,40 +91,42 @@
         imageFrame.origin.x += self.view.frame.size.width;
     }
     //???? --- change 1 to number of images.set image scroll content size according to number of images
-    [imageScroll setContentSize:CGSizeMake(imageScrollOriginalSize.width*1, imageScrollOriginalSize.height)];
+    [imageScroll setContentSize:CGSizeMake(imageScrollOriginalFrame.size.width*1, imageScrollOriginalFrame.size.height)];
     
     //Add container to scroll bar
     [imageScroll addSubview:imageContainer];
     
     //Adding scrollbar to view
     [self.view addSubview:imageScroll];
+    
+    //Adding color to scroll & container for insets impacts
+    [imageScroll setBackgroundColor:[UIColor darkGrayColor]];
+    [imageContainer setBackgroundColor:[UIColor lightGrayColor]];
 }
 
 - (void)singleFingerTapOnImageScroll: (UITapGestureRecognizer *)recognizer {
     if (isImageScrollBarInOriginalSize) {
-        [self transitionToFrame:CGRectMake(0, NAVIGATION_BAR_DEDEUCTION, imageScrollExtendedSize.width, imageScrollExtendedSize.height) containerFrame:CGRectMake(0, -NAVIGATION_BAR_DEDEUCTION + TOP_INSET_FOR_EXTENDED_IMAGES, imageScrollExtendedSize.width, imageScrollExtendedSize.height - TOP_INSET_FOR_EXTENDED_IMAGES*2)];
+        [self transitionToFrame:imageScrollExtendedFrame containerFrame:CGRectMake(0, TOP_INSET_FOR_EXTENDED_IMAGES, imageScrollExtendedFrame.size.width, imageScrollExtendedFrame.size.height-TOP_INSET_FOR_EXTENDED_IMAGES*2)];
     } else {
-        [self transitionToFrame:CGRectMake(0, NAVIGATION_BAR_DEDEUCTION, imageScrollOriginalSize.width, imageScrollOriginalSize.height) containerFrame:CGRectMake(0, 0, imageScrollOriginalSize.width, imageScrollOriginalSize.height)];
+        [self transitionToFrame:imageScrollOriginalFrame containerFrame:imageScrollOriginalFrame];
     }
     isImageScrollBarInOriginalSize = !isImageScrollBarInOriginalSize;
 }
 
 - (void)swipeDownImageScroll: (UISwipeGestureRecognizer *)recognizer {
     //Works only for original scroll. sets to extended size.
-   if (isImageScrollBarInOriginalSize) {
-        [self transitionToFrame:CGRectMake(0, NAVIGATION_BAR_DEDEUCTION, imageScrollExtendedSize.width, imageScrollExtendedSize.height) containerFrame:CGRectMake(0, -NAVIGATION_BAR_DEDEUCTION + TOP_INSET_FOR_EXTENDED_IMAGES, imageScrollExtendedSize.width, imageScrollExtendedSize.height - TOP_INSET_FOR_EXTENDED_IMAGES*2)];
+    if (isImageScrollBarInOriginalSize) {
+        [self transitionToFrame:imageScrollExtendedFrame containerFrame:CGRectMake(0, TOP_INSET_FOR_EXTENDED_IMAGES, imageScrollExtendedFrame.size.width, imageScrollExtendedFrame.size.height - TOP_INSET_FOR_EXTENDED_IMAGES*2)];
         isImageScrollBarInOriginalSize = NO;
     }
-    NSLog(@"Swipe Down");
 }
 
 - (void)swipeUpImageScroll: (UISwipeGestureRecognizer *)recognizer {
     //Works only for extended scroll. resets to original size
     if (!isImageScrollBarInOriginalSize) {
-        [self transitionToFrame:CGRectMake(0, NAVIGATION_BAR_DEDEUCTION, imageScrollOriginalSize.width, imageScrollOriginalSize.height) containerFrame:CGRectMake(0, 0, imageScrollOriginalSize.width, imageScrollOriginalSize.height)];
+        [self transitionToFrame:imageScrollOriginalFrame containerFrame:imageScrollOriginalFrame];
         isImageScrollBarInOriginalSize = YES;
     }
-    NSLog(@"Swipe Up");
 }
 
 - (void) transitionToFrame: (CGRect)imageScrollFrame containerFrame: (CGRect)containerFrame {
