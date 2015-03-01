@@ -70,7 +70,7 @@
 }
 
 - (void)dismissPopOver {
-    [UIView animateWithDuration:0.4 animations:^{
+    [UIView animateWithDuration:0.3 animations:^{
         [self setAlpha:0.0];
     } completion:^(BOOL finished) {
         [self removeFromSuperview];
@@ -78,7 +78,7 @@
 }
 
 - (void)showAnimated {
-    [UIView animateWithDuration:0.4 animations:^{
+    [UIView animateWithDuration:0.3 animations:^{
         [self setAlpha:1.0];
     }];
 }

@@ -18,6 +18,12 @@
 
 @property NSInteger numberOfAdults;
 @property NSInteger numberOfChildren;
+
+@property (nonatomic) NSString *filterHotelName;
+@property NSInteger filterDistance;
+@property NSInteger filterStar;
+@property NSInteger filterPrice;
+
 @property (nonatomic, strong) EANPopOver *popover;
 
 @end
@@ -123,17 +129,22 @@
     ((EANPicker *)self.popover).delegate = self;
     [self.view addSubview:self.popover];
     
-    [self.popover setTitle:@"Pick Persons"];
+    [self.popover setTitle:@"Pick Guest Number"];
     [self.popover setBackgroundColor:[UIColor whiteColor]];
     [self.popover showAnimated];
 }
 
 - (IBAction)showSortView:(id)sender {
-    
+
 }
 
 - (IBAction)showFilterView:(id)sender {
+    self.popover = [[EANFilter alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 250)/2, 0, 250, 250) forTarget:self.view withReferenceFrameToolBarHeight:42.0];
+    ((EANFilter *)self.popover).delegate = self;
+    [self.view addSubview:self.popover];
     
+    [self.popover setBackgroundColor:[UIColor whiteColor]];
+    [self.popover showAnimated];
 }
 
 - (IBAction)toggleMainView:(UIBarButtonItem *)sender {
@@ -174,4 +185,10 @@
     self.numberOfChildren = [((EANPicker *)self.popover) rowSelectedForComponent:1] + 1;
 }
 
+- (void)filtersSelected {
+    self.filterHotelName = [((EANFilter *)self.popover) hotelNameFilterValue];
+    self.filterStar = [((EANFilter *)self.popover) starRatingFilterValue];
+    self.filterDistance = [((EANFilter *)self.popover) distanceFromSelectedLocationFilterValue];
+    self.filterPrice = [((EANFilter *)self.popover) priceFilterValue];
+}
 @end
