@@ -13,7 +13,12 @@
 @interface HotelViewController ()
 {
     BOOL isMapView;
+    NSArray *guestList;
 }
+
+@property NSInteger numberOfAdults;
+@property NSInteger numberOfChildren;
+@property (nonatomic, strong) EANPopOver *popover;
 
 @end
 
@@ -27,6 +32,8 @@
     [self addChildToNavigationBar];
     [self addChildToToolBar];
     [self addChildViewToScrollbar];
+    
+    guestList = [NSArray arrayWithObjects:@[@"1 Adult", @"2 Adults", @"3 Adults", @"4 Adults"], @[@"1 Child", @"2 Children", @"3 Children", @"4 Children"], nil];
 }
 
 - (void)addChildViewToScrollbar {
@@ -112,7 +119,13 @@
 }
 
 - (IBAction)selectNoOfUsers:(id)sender {
+    self.popover = [[EANPicker alloc] initWithFrame:CGRectMake(10, 0, self.view.frame.size.width-20, 300) forTarget:self.view withReferenceFrameToolBarHeight:42.0];
+    ((EANPicker *)self.popover).delegate = self;
+    [self.view addSubview:self.popover];
     
+    [self.popover setTitle:@"Pick Persons"];
+    [self.popover setBackgroundColor:[UIColor whiteColor]];
+    [self.popover showAnimated];
 }
 
 - (IBAction)showSortView:(id)sender {
@@ -143,4 +156,22 @@
         [segue.destinationViewController setTitle:@"Hotel"];
     }
 }
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 2;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    return [[guestList objectAtIndex:component] count];
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    return [[guestList objectAtIndex:component] objectAtIndex:row];
+}
+
+- (void)selectionCompleteForPicker {
+    self.numberOfAdults = [((EANPicker *)self.popover) rowSelectedForComponent:0] + 1;
+    self.numberOfChildren = [((EANPicker *)self.popover) rowSelectedForComponent:1] + 1;
+}
+
 @end
