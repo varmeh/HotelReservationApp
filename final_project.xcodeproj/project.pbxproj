@@ -19,6 +19,7 @@
 		814FA1521A9A62F500D0266A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 814FA1501A9A62F500D0266A /* LaunchScreen.xib */; };
 		814FA15E1A9A62F600D0266A /* final_projectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 814FA15D1A9A62F600D0266A /* final_projectTests.m */; };
 		8185B3D21A9D934000729A09 /* EANWebFramework.m in Sources */ = {isa = PBXBuildFile; fileRef = 8185B3D11A9D934000729A09 /* EANWebFramework.m */; };
+		81B375961AA3C4C4000F4507 /* EANAutoCompleteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 81B375951AA3C4C4000F4507 /* EANAutoCompleteView.m */; };
 		81C03F9A1A9EB32F000347E1 /* HotelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C03F991A9EB32F000347E1 /* HotelViewController.m */; };
 		81C03FD01A9EFACF000347E1 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81C03FCF1A9EFACF000347E1 /* MapKit.framework */; };
 		81C0400A1A9F7211000347E1 /* HotelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C040081A9F7211000347E1 /* HotelTableViewCell.m */; };
@@ -60,6 +61,8 @@
 		814FA15D1A9A62F600D0266A /* final_projectTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = final_projectTests.m; sourceTree = "<group>"; };
 		8185B3D01A9D934000729A09 /* EANWebFramework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EANWebFramework.h; sourceTree = "<group>"; };
 		8185B3D11A9D934000729A09 /* EANWebFramework.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EANWebFramework.m; sourceTree = "<group>"; };
+		81B375941AA3C4C4000F4507 /* EANAutoCompleteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EANAutoCompleteView.h; sourceTree = "<group>"; };
+		81B375951AA3C4C4000F4507 /* EANAutoCompleteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EANAutoCompleteView.m; sourceTree = "<group>"; };
 		81C03F981A9EB32F000347E1 /* HotelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotelViewController.h; sourceTree = "<group>"; };
 		81C03F991A9EB32F000347E1 /* HotelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotelViewController.m; sourceTree = "<group>"; };
 		81C03FCF1A9EFACF000347E1 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -180,6 +183,8 @@
 		81C040181A9FE1EC000347E1 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				81B375941AA3C4C4000F4507 /* EANAutoCompleteView.h */,
+				81B375951AA3C4C4000F4507 /* EANAutoCompleteView.m */,
 				814D91781AA2E28C00835B55 /* EANSort.h */,
 				814D91791AA2E28C00835B55 /* EANSort.m */,
 				814D916F1AA2C53600835B55 /* EANFilter.h */,
@@ -359,6 +364,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8185B3D21A9D934000729A09 /* EANWebFramework.m in Sources */,
+				81B375961AA3C4C4000F4507 /* EANAutoCompleteView.m in Sources */,
 				814FA1471A9A62F500D0266A /* AppDelegate.m in Sources */,
 				814FA1441A9A62F500D0266A /* main.m in Sources */,
 				81C040161A9FD6C1000347E1 /* BookingViewController.m in Sources */,

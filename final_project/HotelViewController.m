@@ -9,12 +9,17 @@
 #import "HotelViewController.h"
 #import <MapKit/MapKit.h>
 #import "HotelTableViewCell.h"
+#import <AFNetworking.h>
 
 @interface HotelViewController ()
 {
     BOOL isMapView;
     NSArray *guestList;
     UITapGestureRecognizer *singleTap;
+    UISearchBar *searchBar;
+    NSString *autocompleteBaseURL;
+    NSDictionary *jsonAutocompleteData;
+    EANAutoCompleteView *searchTable;
 }
 
 @property NSInteger numberOfAdults;
@@ -28,6 +33,8 @@
 @property (nonatomic) NSString *sortCriteria;
 
 @property (nonatomic, strong) EANPopOver *popover;
+
+@property (nonatomic) NSMutableArray *placeList;
 
 //Private Methods
 - (void)displayPopOver;
@@ -52,6 +59,15 @@
     singleTap.numberOfTouchesRequired = 1;
     [self.view addGestureRecognizer:singleTap];
     singleTap.enabled = NO;
+    
+    autocompleteBaseURL = @"https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyDBH36zCQWUjSm6ZqlEwW7lPmaOeAgIfr8&input=";
+    jsonAutocompleteData = [NSDictionary new];
+    self.placeList = [NSMutableArray new];
+    CGFloat statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
+    CGFloat navigationBarHeight = self.navigationController.navigationBar.frame.size.height;
+    searchTable = [[EANAutoCompleteView alloc] initWithFrame:CGRectMake(10, statusBarHeight + navigationBarHeight, 200, 200) forTarget:self.view];
+    searchTable.delegate = self;
+    [self.view addSubview:searchTable];
 }
 
 - (void)addChildViewToScrollbar {
@@ -78,7 +94,7 @@
 
 - (void) addChildToNavigationBar {
     //Adding search bar to navigation bar
-    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(-5.0, 0.0, 200, 44)];
+    searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(-5.0, 0.0, 200, 44)];
     searchBar.delegate = self;
     //Customize search bar
     searchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
@@ -110,6 +126,8 @@
     [self.toolBarHotelScreenOutlet setItems:[NSArray arrayWithObjects: flexibleSpace, sort, flexibleSpace, filter, flexibleSpace, toggleDataView, flexibleSpace, nil]];
 
 }
+
+//Methods specific to Hotel Table View
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
@@ -136,55 +154,24 @@
     [self performSegueWithIdentifier:@"segueHotelDetail" sender:self];
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([[segue identifier] isEqualToString:@"segueHotelDetail"]) {
+        [segue.destinationViewController setTitle:@"Hotel"];
+    }
+}
+
+//Method related to Popovers
 - (IBAction)displayCalendar:(id)sender {
     
 }
 
+//-------Method related to Picker View for Adult selection------//
 - (IBAction)selectNoOfUsers:(id)sender {
     self.popover = [[EANPicker alloc] initWithFrame:CGRectMake(10, 0, self.view.frame.size.width-20, 300) forTarget:self.view withReferenceFrameToolBarHeight:42.0];
     ((EANPicker *)self.popover).delegate = self;
     [self.popover setTitle:@"Pick Guest Number"];
     
     [self displayPopOver];
-}
-
-- (IBAction)showSortView:(id)sender {
-    self.popover = [[EANSort alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 250)/2, 0, 150, 150) forTarget:self.view withReferenceFrameToolBarHeight:42.0];
-    ((EANSort *)self.popover).delegate = self;
-
- //   [self displayPopOver];
-    [self.view addSubview:self.popover];
-    [self.popover setBackgroundColor:[UIColor whiteColor]];
-    [self.popover showAnimated];
-    
-}
-
-- (IBAction)showFilterView:(id)sender {
-    self.popover = [[EANFilter alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 250)/2, 0, 250, 250) forTarget:self.view withReferenceFrameToolBarHeight:42.0];
-    ((EANFilter *)self.popover).delegate = self;
-    
-    [self displayPopOver];
-}
-
-- (IBAction)toggleMainView:(UIBarButtonItem *)sender {
-    //The change in content size ensures no horizontal dragging from table view to map view.
-    //draging in map view anyways result in moving to new areas.
-    if (isMapView) {
-        [self.scrollBarOutlet setContentSize:CGSizeMake(self.view.frame.size.width, self.view.frame.size.height)];
-        [self.scrollBarOutlet setContentOffset:CGPointMake(0, 0) animated:YES];
-        [sender setImage:[UIImage imageNamed:@"map_marker"]];
-    } else {
-        [self.scrollBarOutlet setContentSize:CGSizeMake(self.view.frame.size.width*2, self.view.frame.size.height)];
-        [self.scrollBarOutlet setContentOffset:CGPointMake(self.view.frame.size.width, 0) animated:YES];
-        [sender setImage:[UIImage imageNamed:@"align_justify"]];
-    }
-    isMapView = !isMapView;
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([[segue identifier] isEqualToString:@"segueHotelDetail"]) {
-        [segue.destinationViewController setTitle:@"Hotel"];
-    }
 }
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
@@ -206,6 +193,31 @@
     [self deactivatePopover];
 }
 
+//-------Method related to Sorting of Hotel Information------//
+- (IBAction)showSortView:(id)sender {
+    self.popover = [[EANSort alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 250)/2, 0, 150, 150) forTarget:self.view withReferenceFrameToolBarHeight:42.0];
+    ((EANSort *)self.popover).delegate = self;
+
+ //   [self displayPopOver];
+    [self.view addSubview:self.popover];
+    [self.popover setBackgroundColor:[UIColor whiteColor]];
+    [self.popover showAnimated];
+    
+}
+
+- (void)sortCriteriaSelected {
+    self.sortCriteria = [(EANSort *)self.popover sortCriteria];
+    
+    //    [self deactivatePopover];
+}
+
+- (IBAction)showFilterView:(id)sender {
+    self.popover = [[EANFilter alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 250)/2, 0, 250, 250) forTarget:self.view withReferenceFrameToolBarHeight:42.0];
+    ((EANFilter *)self.popover).delegate = self;
+    
+    [self displayPopOver];
+}
+
 - (void)filtersSelected {
     self.filterHotelName = [((EANFilter *)self.popover) hotelNameFilterValue];
     self.filterStar = [((EANFilter *)self.popover) starRatingFilterValue];
@@ -215,12 +227,22 @@
     [self deactivatePopover];
 }
 
-- (void)sortCriteriaSelected {
-    self.sortCriteria = [(EANSort *)self.popover sortCriteria];
-    
-//    [self deactivatePopover];
+- (IBAction)toggleMainView:(UIBarButtonItem *)sender {
+    //The change in content size ensures no horizontal dragging from table view to map view.
+    //draging in map view anyways result in moving to new areas.
+    if (isMapView) {
+        [self.scrollBarOutlet setContentSize:CGSizeMake(self.view.frame.size.width, self.view.frame.size.height)];
+        [self.scrollBarOutlet setContentOffset:CGPointMake(0, 0) animated:YES];
+        [sender setImage:[UIImage imageNamed:@"map_marker"]];
+    } else {
+        [self.scrollBarOutlet setContentSize:CGSizeMake(self.view.frame.size.width*2, self.view.frame.size.height)];
+        [self.scrollBarOutlet setContentOffset:CGPointMake(self.view.frame.size.width, 0) animated:YES];
+        [sender setImage:[UIImage imageNamed:@"align_justify"]];
+    }
+    isMapView = !isMapView;
 }
 
+//----------- Method for managing display popovers -----------//
 - (void)displayPopOver {
     [self.view addSubview:self.popover];
     [self.popover setBackgroundColor:[UIColor whiteColor]];
@@ -235,5 +257,45 @@
     if (self.popover != nil)
         [self.popover dismissPopOver];
     self.popover = nil;
+}
+
+//-------Method related to Search & AutoComplete------//
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    NSString *searchURL = [autocompleteBaseURL stringByAppendingString:searchText];
+
+    // this line of code avoids invalid parameter url string
+    NSString *encoded = [searchURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:encoded parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        jsonAutocompleteData = (NSDictionary *)responseObject;
+        [self parseAutoCompleteData];
+    }failure: ^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@",[error localizedDescription]);
+    }];
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    
+}
+
+- (void) parseAutoCompleteData {
+    [self.placeList removeAllObjects];
+    for (NSDictionary *place in jsonAutocompleteData[@"predictions"]) {
+        NSString *newPlace = place[@"description"];
+        [self.placeList addObject:newPlace];
+    }
+    [searchTable reloadAutoCompleteData];
+}
+
+- (NSArray *)autocompleteResults {
+    return [self.placeList copy];
+}
+
+- (void)userSelectedAutoCompleteResult:(NSString *)string {
+    [searchBar setText:string];
+    
+    //Add search request here.
 }
 @end
