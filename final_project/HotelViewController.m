@@ -14,6 +14,7 @@
 {
     BOOL isMapView;
     NSArray *guestList;
+    UITapGestureRecognizer *singleTap;
 }
 
 @property NSInteger numberOfAdults;
@@ -28,6 +29,9 @@
 
 @property (nonatomic, strong) EANPopOver *popover;
 
+//Private Methods
+- (void)displayPopOver;
+- (void)deactivatePopover;
 @end
 
 @implementation HotelViewController
@@ -42,6 +46,12 @@
     [self addChildViewToScrollbar];
     
     guestList = [NSArray arrayWithObjects:@[@"1 Adult", @"2 Adults", @"3 Adults", @"4 Adults"], @[@"1 Child", @"2 Children", @"3 Children", @"4 Children"], nil];
+    
+    singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deactivatePopover)];
+    singleTap.numberOfTapsRequired = 1;
+    singleTap.numberOfTouchesRequired = 1;
+    [self.view addGestureRecognizer:singleTap];
+    singleTap.enabled = NO;
 }
 
 - (void)addChildViewToScrollbar {
@@ -129,29 +139,27 @@
 - (IBAction)selectNoOfUsers:(id)sender {
     self.popover = [[EANPicker alloc] initWithFrame:CGRectMake(10, 0, self.view.frame.size.width-20, 300) forTarget:self.view withReferenceFrameToolBarHeight:42.0];
     ((EANPicker *)self.popover).delegate = self;
-    [self.view addSubview:self.popover];
-    
     [self.popover setTitle:@"Pick Guest Number"];
-    [self.popover setBackgroundColor:[UIColor whiteColor]];
-    [self.popover showAnimated];
+    
+    [self displayPopOver];
 }
 
 - (IBAction)showSortView:(id)sender {
     self.popover = [[EANSort alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 250)/2, 0, 150, 150) forTarget:self.view withReferenceFrameToolBarHeight:42.0];
     ((EANSort *)self.popover).delegate = self;
+
+ //   [self displayPopOver];
     [self.view addSubview:self.popover];
-    
     [self.popover setBackgroundColor:[UIColor whiteColor]];
     [self.popover showAnimated];
+    
 }
 
 - (IBAction)showFilterView:(id)sender {
     self.popover = [[EANFilter alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 250)/2, 0, 250, 250) forTarget:self.view withReferenceFrameToolBarHeight:42.0];
     ((EANFilter *)self.popover).delegate = self;
-    [self.view addSubview:self.popover];
     
-    [self.popover setBackgroundColor:[UIColor whiteColor]];
-    [self.popover showAnimated];
+    [self displayPopOver];
 }
 
 - (IBAction)toggleMainView:(UIBarButtonItem *)sender {
@@ -190,6 +198,8 @@
 - (void)selectionCompleteForPicker {
     self.numberOfAdults = [((EANPicker *)self.popover) rowSelectedForComponent:0] + 1;
     self.numberOfChildren = [((EANPicker *)self.popover) rowSelectedForComponent:1] + 1;
+    
+    [self deactivatePopover];
 }
 
 - (void)filtersSelected {
@@ -197,9 +207,29 @@
     self.filterStar = [((EANFilter *)self.popover) starRatingFilterValue];
     self.filterDistance = [((EANFilter *)self.popover) distanceFromSelectedLocationFilterValue];
     self.filterPrice = [((EANFilter *)self.popover) priceFilterValue];
+    
+    [self deactivatePopover];
 }
 
 - (void)sortCriteriaSelected {
     self.sortCriteria = [(EANSort *)self.popover sortCriteria];
+    
+//    [self deactivatePopover];
+}
+
+- (void)displayPopOver {
+    [self.view addSubview:self.popover];
+    [self.popover setBackgroundColor:[UIColor whiteColor]];
+    [self.popover showAnimated];
+    
+    [singleTap setEnabled:YES];
+}
+
+- (void)deactivatePopover {
+    [singleTap setEnabled:NO];
+    
+    if (self.popover != nil)
+        [self.popover dismissPopOver];
+    self.popover = nil;
 }
 @end

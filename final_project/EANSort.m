@@ -42,7 +42,6 @@
     [self.table setShowsVerticalScrollIndicator:NO];
     [self.table setScrollEnabled:NO];
     [self.table setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-//    [self.table setSeparatorColor:[UIColor blueColor]]; //Applicable when separator style is not none
 }
 
 //This function called when selection completed.
@@ -90,5 +89,5 @@
 - (NSString *)sortCriteria {
     UITableViewCell *cell = [self.table cellForRowAtIndexPath:[self.table indexPathForSelectedRow]];
     return cell.textLabel.text;
-}
+}   
 @end
