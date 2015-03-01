@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "EANPicker.h"
 #import "EANFilter.h"
+#import "EANSort.h"
 
-@interface HotelViewController : UIViewController <UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource, EANPickerDelegate, EANFilterDelegate>
+@interface HotelViewController : UIViewController <UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource, EANPickerDelegate, EANFilterDelegate, EANSortDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollBarOutlet;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolBarHotelScreenOutlet;
 

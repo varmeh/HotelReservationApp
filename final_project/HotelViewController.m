@@ -24,6 +24,8 @@
 @property NSInteger filterStar;
 @property NSInteger filterPrice;
 
+@property (nonatomic) NSString *sortCriteria;
+
 @property (nonatomic, strong) EANPopOver *popover;
 
 @end
@@ -135,7 +137,12 @@
 }
 
 - (IBAction)showSortView:(id)sender {
-
+    self.popover = [[EANSort alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 250)/2, 0, 150, 150) forTarget:self.view withReferenceFrameToolBarHeight:42.0];
+    ((EANSort *)self.popover).delegate = self;
+    [self.view addSubview:self.popover];
+    
+    [self.popover setBackgroundColor:[UIColor whiteColor]];
+    [self.popover showAnimated];
 }
 
 - (IBAction)showFilterView:(id)sender {
@@ -190,5 +197,9 @@
     self.filterStar = [((EANFilter *)self.popover) starRatingFilterValue];
     self.filterDistance = [((EANFilter *)self.popover) distanceFromSelectedLocationFilterValue];
     self.filterPrice = [((EANFilter *)self.popover) priceFilterValue];
+}
+
+- (void)sortCriteriaSelected {
+    self.sortCriteria = [(EANSort *)self.popover sortCriteria];
 }
 @end

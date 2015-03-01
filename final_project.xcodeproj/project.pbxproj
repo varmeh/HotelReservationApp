@@ -11,6 +11,7 @@
 		814D916A1AA2965F00835B55 /* EANPopOver.m in Sources */ = {isa = PBXBuildFile; fileRef = 814D91671AA2965F00835B55 /* EANPopOver.m */; };
 		814D916B1AA2965F00835B55 /* EANPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 814D91691AA2965F00835B55 /* EANPicker.m */; };
 		814D91711AA2C53600835B55 /* EANFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 814D91701AA2C53600835B55 /* EANFilter.m */; };
+		814D917A1AA2E28C00835B55 /* EANSort.m in Sources */ = {isa = PBXBuildFile; fileRef = 814D91791AA2E28C00835B55 /* EANSort.m */; };
 		814FA1441A9A62F500D0266A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 814FA1431A9A62F500D0266A /* main.m */; };
 		814FA1471A9A62F500D0266A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 814FA1461A9A62F500D0266A /* AppDelegate.m */; };
 		814FA14D1A9A62F500D0266A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 814FA14B1A9A62F500D0266A /* Main.storyboard */; };
@@ -44,6 +45,8 @@
 		814D91691AA2965F00835B55 /* EANPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EANPicker.m; sourceTree = "<group>"; };
 		814D916F1AA2C53600835B55 /* EANFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EANFilter.h; sourceTree = "<group>"; };
 		814D91701AA2C53600835B55 /* EANFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EANFilter.m; sourceTree = "<group>"; };
+		814D91781AA2E28C00835B55 /* EANSort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EANSort.h; sourceTree = "<group>"; };
+		814D91791AA2E28C00835B55 /* EANSort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EANSort.m; sourceTree = "<group>"; };
 		814FA13E1A9A62F500D0266A /* final_project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = final_project.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		814FA1421A9A62F500D0266A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		814FA1431A9A62F500D0266A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -177,6 +180,8 @@
 		81C040181A9FE1EC000347E1 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				814D91781AA2E28C00835B55 /* EANSort.h */,
+				814D91791AA2E28C00835B55 /* EANSort.m */,
 				814D916F1AA2C53600835B55 /* EANFilter.h */,
 				814D91701AA2C53600835B55 /* EANFilter.m */,
 				814D91661AA2965F00835B55 /* EANPopOver.h */,
@@ -363,6 +368,7 @@
 				81C040131A9F89B3000347E1 /* HotelDetailViewController.m in Sources */,
 				814D916A1AA2965F00835B55 /* EANPopOver.m in Sources */,
 				81C0400A1A9F7211000347E1 /* HotelTableViewCell.m in Sources */,
+				814D917A1AA2E28C00835B55 /* EANSort.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
