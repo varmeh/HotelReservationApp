@@ -53,7 +53,6 @@
     [bar setItems:[NSArray arrayWithObjects:barTitle, flexibleSpace, btnDone, nil]];
     
     [self addSubview:bar];
-    [self showAnimated];
 }
 
 //UIToolbar delegate function

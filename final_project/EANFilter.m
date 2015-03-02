@@ -45,33 +45,32 @@
     [self.filterHotelName setBorderStyle:UITextBorderStyleRoundedRect];
     frame.origin.y += heightOfComponent + marginBetweenFilters;
     
-    NSDictionary *normalStateTextAttributes = @{NSFontAttributeName:[UIFont fontWithName:@"Arial" size:20.0]};
-    NSDictionary *highlightedStateTextAttributes = @{NSFontAttributeName:[UIFont fontWithName:@"Arial" size:20.0], NSForegroundColorAttributeName:[UIColor whiteColor]};
+    NSDictionary *textAttributes = @{NSFontAttributeName:[UIFont fontWithName:@"Arial" size:20.0]};
     
     //Component 2 - Distance
     self.filterDistance = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"2.5", @"7.5", @"All", nil]];
     [self.filterDistance setFrame:frame];
-    [self.filterDistance setSelectedSegmentIndex:UISegmentedControlSegmentRight];
-    [self.filterDistance setTitleTextAttributes:normalStateTextAttributes forState:UIControlStateNormal];
-    [self.filterDistance setTitleTextAttributes:highlightedStateTextAttributes forState:UIControlStateSelected];
+    [self.filterDistance setSelectedSegmentIndex:2];
+    [self.filterDistance setTitleTextAttributes:textAttributes forState:UIControlStateNormal];
+    [self.filterDistance setTitleTextAttributes:textAttributes forState:UIControlStateSelected];
 
     frame.origin.y += heightOfComponent + marginBetweenFilters;
 
     //Component 3 - Star
     self.filterStar = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"4", @"5", @"All", nil]];
     [self.filterStar setFrame:frame];
-//    [self.filterStar setSelectedSegmentIndex:2];
-    [self.filterStar setTitleTextAttributes:normalStateTextAttributes forState:UIControlStateNormal];
-    [self.filterStar setTitleTextAttributes:highlightedStateTextAttributes forState:UIControlStateSelected];
+    [self.filterStar setSelectedSegmentIndex:2];
+    [self.filterStar setTitleTextAttributes:textAttributes forState:UIControlStateNormal];
+    [self.filterStar setTitleTextAttributes:textAttributes forState:UIControlStateSelected];
 
     frame.origin.y += heightOfComponent + marginBetweenFilters;
     
     //Component 4 - Price
     self.filterPrice = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"$$", @"$$$", @"All", nil]];
     [self.filterPrice setFrame:frame];
-//    [self.filterPrice setSelectedSegmentIndex:2];
-    [self.filterPrice setTitleTextAttributes:normalStateTextAttributes forState:UIControlStateNormal];
-    [self.filterPrice setTitleTextAttributes:highlightedStateTextAttributes forState:UIControlStateSelected];
+    [self.filterPrice setSelectedSegmentIndex:2];
+    [self.filterPrice setTitleTextAttributes:textAttributes forState:UIControlStateNormal];
+    [self.filterPrice setTitleTextAttributes:textAttributes forState:UIControlStateSelected];
 
     
     //Add all components to pop over view
