@@ -11,6 +11,7 @@
 @protocol EANSortDelegate <NSObject>
 
 - (void)sortCriteriaSelected;
+- (NSString *)getCurrentSortCriteria;
 
 @end
 

@@ -14,6 +14,7 @@
 @property CGFloat cellHeight;
 @property (nonatomic, strong) UITableView *table;
 
+@property NSInteger currentSelectedRow;
 @end
 
 @implementation EANSort
@@ -26,6 +27,7 @@
 - (void)showAnimated {
     //Could not be called from init as delegate is required for this function & delegation connection is done afterwards.
     self.sortOptions = [NSArray arrayWithObjects:@"Popularity", @"Price", @"Distance", nil];
+    self.currentSelectedRow = 0;
     [self addSortOptions];
     [super showAnimated];
 }
@@ -42,6 +44,9 @@
     [self.table setShowsVerticalScrollIndicator:NO];
     [self.table setScrollEnabled:NO];
     [self.table setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    
+    //Current Selected Row
+    self.currentSelectedRow = [self.sortOptions indexOfObject:[self.delegate getCurrentSortCriteria]];
 }
 
 //This function called when selection completed.
@@ -58,7 +63,14 @@
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
     cell.frame = CGRectMake(0, self.cellHeight*indexPath.row, self.frame.size.width, self.cellHeight);
     [cell.textLabel setText:[self.sortOptions objectAtIndex:indexPath.row]];
-    [cell.imageView setImage:[UIImage imageNamed:@"like"]];
+
+    if (self.currentSelectedRow == indexPath.row){
+        [cell.imageView setImage:[UIImage imageNamed:@"like_filled"]];
+        [tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:self.currentSelectedRow inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
+    }
+    else
+        [cell.imageView setImage:[UIImage imageNamed:@"like"]];
+    
     
     //Customizing Cell Color on selection
     UIView *bgColorView = [[UIView alloc] init];
@@ -80,6 +92,7 @@
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     [cell.imageView setImage:[UIImage imageNamed:@"like"]];
 }
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];

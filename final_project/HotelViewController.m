@@ -51,7 +51,7 @@
     [self addChildToToolBar];
     [self addChildViewToScrollbar];
     
-    guestList = [NSArray arrayWithObjects:@[@"1 Adult", @"2 Adults", @"3 Adults", @"4 Adults"], @[@"1 Child", @"2 Children", @"3 Children", @"4 Children"], nil];
+    guestList = [NSArray arrayWithObjects:@[@"1 Adult", @"2 Adults", @"3 Adults", @"4 Adults"], @[@"NO Child", @"1 Child", @"2 Children", @"3 Children", @"4 Children"], nil];
     
     autocompleteBaseURL = @"https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyDBH36zCQWUjSm6ZqlEwW7lPmaOeAgIfr8&input=";
     jsonAutocompleteData = [NSDictionary new];
@@ -65,6 +65,8 @@
     self.filterDistance = @2;
     self.filterStar = @2;
     self.filterPrice = @2;
+    
+    self.sortCriteria = @"Popularity";
 }
 
 - (void)addChildViewToScrollbar {
@@ -209,6 +211,9 @@
     self.sortCriteria = [(EANSort *)self.popover sortCriteria];
 }
 
+- (NSString *)getCurrentSortCriteria {
+    return self.sortCriteria;
+}
 //-------Method related to Filtering of Hotel Information------//
 - (IBAction)showFilterView:(id)sender {
     if (self.popover)
