@@ -15,7 +15,6 @@
 {
     BOOL isMapView;
     NSArray *guestList;
-    UITapGestureRecognizer *singleTap;
     UISearchBar *searchBar;
     NSString *autocompleteBaseURL;
     NSDictionary *jsonAutocompleteData;
@@ -38,7 +37,7 @@
 
 //Private Methods
 - (void)displayPopOver;
-- (void)deactivatePopover;
+
 @end
 
 @implementation HotelViewController
@@ -53,12 +52,6 @@
     [self addChildViewToScrollbar];
     
     guestList = [NSArray arrayWithObjects:@[@"1 Adult", @"2 Adults", @"3 Adults", @"4 Adults"], @[@"1 Child", @"2 Children", @"3 Children", @"4 Children"], nil];
-    
-    singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deactivatePopover)];
-    singleTap.numberOfTapsRequired = 1;
-    singleTap.numberOfTouchesRequired = 1;
-    [self.view addGestureRecognizer:singleTap];
-    singleTap.enabled = NO;
     
     autocompleteBaseURL = @"https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyDBH36zCQWUjSm6ZqlEwW7lPmaOeAgIfr8&input=";
     jsonAutocompleteData = [NSDictionary new];
@@ -96,6 +89,7 @@
     //Adding search bar to navigation bar
     searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(-5.0, 0.0, 200, 44)];
     searchBar.delegate = self;
+    
     //Customize search bar
     searchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     searchBar.placeholder = @"Location";
@@ -124,7 +118,7 @@
     UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
     [self.toolBarHotelScreenOutlet setItems:[NSArray arrayWithObjects: flexibleSpace, sort, flexibleSpace, filter, flexibleSpace, toggleDataView, flexibleSpace, nil]];
-
+    
 }
 
 //Methods specific to Hotel Table View
@@ -138,7 +132,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     HotelTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"hotelCell" forIndexPath:indexPath];
-
+    
     //Customizing Cell Color on selection
     UIView *bgColorView = [[UIView alloc] init];
     bgColorView.backgroundColor = [UIColor colorWithRed:0.0 green:122.0 blue:255.0 alpha:0.0];
@@ -167,8 +161,12 @@
 
 //-------Method related to Picker View for Adult selection------//
 - (IBAction)selectNoOfUsers:(id)sender {
+    if (self.popover)
+        [self.popover dismissPopOver];
+    
     self.popover = [[EANPicker alloc] initWithFrame:CGRectMake(10, 0, self.view.frame.size.width-20, 300) forTarget:self.view withReferenceFrameToolBarHeight:42.0];
     ((EANPicker *)self.popover).delegate = self;
+    self.popover.popoverDelegate = self;
     [self.popover setTitle:@"Pick Guest Number"];
     
     [self displayPopOver];
@@ -189,31 +187,32 @@
 - (void)selectionCompleteForPicker {
     self.numberOfAdults = [((EANPicker *)self.popover) rowSelectedForComponent:0] + 1;
     self.numberOfChildren = [((EANPicker *)self.popover) rowSelectedForComponent:1] + 1;
-    
-    [self deactivatePopover];
 }
 
 //-------Method related to Sorting of Hotel Information------//
 - (IBAction)showSortView:(id)sender {
+    if (self.popover)
+        [self.popover dismissPopOver];
+        
     self.popover = [[EANSort alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 250)/2, 0, 150, 150) forTarget:self.view withReferenceFrameToolBarHeight:42.0];
     ((EANSort *)self.popover).delegate = self;
-
- //   [self displayPopOver];
-    [self.view addSubview:self.popover];
-    [self.popover setBackgroundColor:[UIColor whiteColor]];
-    [self.popover showAnimated];
+    self.popover.popoverDelegate = self;
     
+    [self displayPopOver];
 }
 
 - (void)sortCriteriaSelected {
     self.sortCriteria = [(EANSort *)self.popover sortCriteria];
-    
-    //    [self deactivatePopover];
 }
 
+//-------Method related to Filtering of Hotel Information------//
 - (IBAction)showFilterView:(id)sender {
+    if (self.popover)
+        [self.popover dismissPopOver];
+    
     self.popover = [[EANFilter alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 250)/2, 0, 250, 250) forTarget:self.view withReferenceFrameToolBarHeight:42.0];
     ((EANFilter *)self.popover).delegate = self;
+    self.popover.popoverDelegate = self;
     
     [self displayPopOver];
 }
@@ -223,8 +222,6 @@
     self.filterStar = [((EANFilter *)self.popover) starRatingFilterValue];
     self.filterDistance = [((EANFilter *)self.popover) distanceFromSelectedLocationFilterValue];
     self.filterPrice = [((EANFilter *)self.popover) priceFilterValue];
-    
-    [self deactivatePopover];
 }
 
 - (IBAction)toggleMainView:(UIBarButtonItem *)sender {
@@ -245,17 +242,12 @@
 //----------- Method for managing display popovers -----------//
 - (void)displayPopOver {
     [self.view addSubview:self.popover];
+    
     [self.popover setBackgroundColor:[UIColor whiteColor]];
     [self.popover showAnimated];
-    
-    [singleTap setEnabled:YES];
 }
 
-- (void)deactivatePopover {
-    [singleTap setEnabled:NO];
-    
-    if (self.popover != nil)
-        [self.popover dismissPopOver];
+-(void)setPopoverToNil{
     self.popover = nil;
 }
 
@@ -263,7 +255,7 @@
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     NSString *searchURL = [autocompleteBaseURL stringByAppendingString:searchText];
-
+    
     // this line of code avoids invalid parameter url string
     NSString *encoded = [searchURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     

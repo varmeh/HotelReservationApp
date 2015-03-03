@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol EANPopoverDelegate <NSObject>
+
+- (void)setPopoverToNil;
+
+@end
+
+
 @interface EANPopOver : UIView <UIToolbarDelegate>
 
 @property NSInteger tabBarHeight;
@@ -15,6 +22,8 @@
 - (void)setTitle: (NSString *)title;
 - (void)dismissPopOver;
 - (void)showAnimated;
+
+@property(nonatomic, weak) id <EANPopoverDelegate>popoverDelegate;
 
 //Override this function in all child classes for delegate implementation.
 //Call this super function once delegation completed.

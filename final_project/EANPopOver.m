@@ -12,18 +12,38 @@
 @interface EANPopOver ()
 {
     UIBarButtonItem *barTitle;
+    UIView *popOverMainScreenView;
+    EANPopOver *popoverView;
 }
 
 - (void)addSelectionBarAtTop;
 @end
 
 
+
+
 @implementation EANPopOver
 
 - (instancetype)initWithFrame:(CGRect)frame forTarget:(UIView *)parentView withReferenceFrameToolBarHeight:(CGFloat)toolbarHeight{
     CGRect popoverFrame = CGRectMake(frame.origin.x, parentView.frame.size.height - (frame.size.height + toolbarHeight + 2), frame.size.width, frame.size.height);
-    return [self initWithFrame:popoverFrame];
+    
+    popoverView = [self initWithFrame:popoverFrame];
+    
+//    popOverMainScreenView = [[UIView alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
+    popOverMainScreenView = [[UIView alloc] initWithFrame:CGRectMake(parentView.frame.origin.x, parentView.frame.origin.y, parentView.frame.size.width, parentView.frame.size.height - toolbarHeight)];
+    [popOverMainScreenView addSubview:popoverView];
+    
+    [parentView addSubview:popOverMainScreenView];
+    
+    //Adding Tap Gesture to sc
+    UITapGestureRecognizer *dismissPopover = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissPopOver)];
+    dismissPopover.numberOfTapsRequired = 1;
+    dismissPopover.numberOfTouchesRequired = 1;
+    [popOverMainScreenView addGestureRecognizer:dismissPopover];
+    
+    return popoverView;
 }
+
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -38,6 +58,7 @@
 }
 
 - (void)addSelectionBarAtTop {
+    
     //Adding toolbar to top of popover window
     [self setTabBarHeight:HEIGHT_OF_POPOVER_TABBAR];
     UIToolbar *bar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.tabBarHeight)];
@@ -69,15 +90,16 @@
 }
 
 - (void)dismissPopOver {
-    [UIView animateWithDuration:0.3 animations:^{
-        [self setAlpha:0.0];
-    } completion:^(BOOL finished) {
-        [self removeFromSuperview];
-    }];
+    //Block call with UIView animateWithDuration removed as it's async by design. So, thread will move to creation of new pop overs even before previous popover is removed leading to zombies
+    //Fix - Used sync dispatch call or semaphore or remove it, if not necessary.
+    [self setAlpha:0.0];
+    [popoverView removeFromSuperview];
+    [popOverMainScreenView removeFromSuperview];
+    [self.popoverDelegate setPopoverToNil];
 }
 
 - (void)showAnimated {
-    [UIView animateWithDuration:0.3 animations:^{
+    [UIView animateWithDuration:0.2 animations:^{
         [self setAlpha:1.0];
     }];
 }
