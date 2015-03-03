@@ -165,18 +165,28 @@
 
 //Method related to Popovers
 - (IBAction)displayCalendar:(id)sender {
+    //In mapview, do not display any popovers
+    if (isMapView)
+        return;
+    
+    if (self.popover)
+        [self.popover dismissPopOver];
     
 }
 
 //-------Method related to Picker View for Adult selection------//
 - (IBAction)selectNoOfUsers:(id)sender {
+    //In mapview, do not display any popovers
+    if (isMapView)
+        return;
+    
     if (self.popover)
         [self.popover dismissPopOver];
     
     self.popover = [[EANPicker alloc] initWithFrame:CGRectMake(10, 0, self.view.frame.size.width-20, 300) forTarget:self.view withReferenceFrameToolBarHeight:42.0];
     ((EANPicker *)self.popover).delegate = self;
     self.popover.popoverDelegate = self;
-    [self.popover setTitle:@"Pick Guest Number"];
+    [self.popover setTitle:@"Guest Selection"];
     
     [self displayPopOver];
 }
@@ -208,12 +218,17 @@
 
 //-------Method related to Sorting of Hotel Information------//
 - (IBAction)showSortView:(id)sender {
+    //In mapview, do not display any popovers
+    if (isMapView)
+        return;
+    
     if (self.popover)
         [self.popover dismissPopOver];
         
     self.popover = [[EANSort alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 250)/2, 0, 150, 150) forTarget:self.view withReferenceFrameToolBarHeight:42.0];
     ((EANSort *)self.popover).delegate = self;
     self.popover.popoverDelegate = self;
+    [self.popover setTitle:@"Sort Hotels"];
     
     [self displayPopOver];
 }
@@ -227,13 +242,17 @@
 }
 //-------Method related to Filtering of Hotel Information------//
 - (IBAction)showFilterView:(id)sender {
+    //In mapview, do not display any popovers
+    if (isMapView)
+        return;
+    
     if (self.popover)
         [self.popover dismissPopOver];
     
     self.popover = [[EANFilter alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 250)/2, 0, 250, 250) forTarget:self.view withReferenceFrameToolBarHeight:42.0];
     ((EANFilter *)self.popover).delegate = self;
     self.popover.popoverDelegate = self;
-    
+    [self.popover setTitle:@"Filter Hotels"];
     [self displayPopOver];
 }
 
@@ -256,6 +275,9 @@
         [self.scrollBarOutlet setContentOffset:CGPointMake(0, 0) animated:YES];
         [sender setImage:[UIImage imageNamed:@"map_marker"]];
     } else {
+        //Remove popover if any
+        [self.popover dismissPopOver];
+        
         [self.scrollBarOutlet setContentSize:CGSizeMake(self.view.frame.size.width*2, self.view.frame.size.height)];
         [self.scrollBarOutlet setContentOffset:CGPointMake(self.view.frame.size.width, 0) animated:YES];
         [sender setImage:[UIImage imageNamed:@"align_justify"]];

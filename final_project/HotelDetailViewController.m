@@ -98,10 +98,6 @@
     
     //Adding scrollbar to view
     [self.view addSubview:imageScroll];
-    
-    //Adding color to scroll & container for insets impacts
-    [imageScroll setBackgroundColor:[UIColor darkGrayColor]];
-    [imageContainer setBackgroundColor:[UIColor lightGrayColor]];
 }
 
 - (void)singleFingerTapOnImageScroll: (UITapGestureRecognizer *)recognizer {
