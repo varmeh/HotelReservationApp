@@ -11,7 +11,8 @@
 @protocol EANPickerDelegate <NSObject>
 
 - (void)selectionCompleteForPicker;
-
+- (NSInteger) getSelectedNumberOfAdults;
+- (NSInteger) getSelectedNumberOfChildren;
 @end
 
 @interface EANPicker : EANPopOver

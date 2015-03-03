@@ -66,6 +66,9 @@
     self.filterStar = @2;
     self.filterPrice = @2;
     
+    self.numberOfChildren = 0;
+    self.numberOfAdults = 1;
+    
     self.sortCriteria = @"Popularity";
 }
 
@@ -193,6 +196,14 @@
 - (void)selectionCompleteForPicker {
     self.numberOfAdults = [((EANPicker *)self.popover) rowSelectedForComponent:0] + 1;
     self.numberOfChildren = [((EANPicker *)self.popover) rowSelectedForComponent:1];
+}
+
+- (NSInteger)getSelectedNumberOfAdults {
+    return self.numberOfAdults-1;
+}
+
+- (NSInteger)getSelectedNumberOfChildren {
+    return self.numberOfChildren;
 }
 
 //-------Method related to Sorting of Hotel Information------//

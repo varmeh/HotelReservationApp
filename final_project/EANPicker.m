@@ -34,6 +34,9 @@
     self.picker.delegate = self.delegate;
     self.picker.dataSource = self.delegate;
     
+    [self.picker selectRow:[self.delegate getSelectedNumberOfAdults] inComponent:0 animated:NO];
+    [self.picker selectRow:[self.delegate getSelectedNumberOfChildren] inComponent:1 animated:NO];
+    
     [self addSubview:self.picker];
 }
 
