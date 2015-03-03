@@ -25,9 +25,9 @@
 @property NSInteger numberOfChildren;
 
 @property (nonatomic) NSString *filterHotelName;
-@property NSInteger filterDistance;
-@property NSInteger filterStar;
-@property NSInteger filterPrice;
+@property NSNumber *filterDistance;
+@property NSNumber *filterStar;
+@property NSNumber *filterPrice;
 
 @property (nonatomic) NSString *sortCriteria;
 
@@ -61,6 +61,10 @@
     searchTable = [[EANAutoCompleteView alloc] initWithFrame:CGRectMake(10, statusBarHeight + navigationBarHeight, 200, 200) forTarget:self.view];
     searchTable.delegate = self;
     [self.view addSubview:searchTable];
+    
+    self.filterDistance = @2;
+    self.filterStar = @2;
+    self.filterPrice = @2;
 }
 
 - (void)addChildViewToScrollbar {
@@ -186,7 +190,7 @@
 
 - (void)selectionCompleteForPicker {
     self.numberOfAdults = [((EANPicker *)self.popover) rowSelectedForComponent:0] + 1;
-    self.numberOfChildren = [((EANPicker *)self.popover) rowSelectedForComponent:1] + 1;
+    self.numberOfChildren = [((EANPicker *)self.popover) rowSelectedForComponent:1];
 }
 
 //-------Method related to Sorting of Hotel Information------//
@@ -222,6 +226,10 @@
     self.filterStar = [((EANFilter *)self.popover) starRatingFilterValue];
     self.filterDistance = [((EANFilter *)self.popover) distanceFromSelectedLocationFilterValue];
     self.filterPrice = [((EANFilter *)self.popover) priceFilterValue];
+}
+
+- (NSArray *)getCurrentFilterValues{
+    return [NSArray arrayWithObjects:self.filterDistance, self.filterStar, self.filterPrice, nil];
 }
 
 - (IBAction)toggleMainView:(UIBarButtonItem *)sender {

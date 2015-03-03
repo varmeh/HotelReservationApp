@@ -37,6 +37,9 @@
     CGFloat heightOfComponent = (parentFrame.size.height - (insets.top + insets.bottom))/4.0 - 2*marginBetweenFilters;
     
     CGRect frame = CGRectMake(insets.left, self.tabBarHeight + insets.top, parentFrame.size.width - (insets.left+insets.right), heightOfComponent);
+
+    //Get currently selected Values
+    NSArray *selectedValues = [self.delegate getCurrentFilterValues];
     
     //Adding elements in sequential order
     //Component 1 - Hotel Name Filter
@@ -50,7 +53,7 @@
     //Component 2 - Distance
     self.filterDistance = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"2.5", @"7.5", @"All", nil]];
     [self.filterDistance setFrame:frame];
-    [self.filterDistance setSelectedSegmentIndex:2];
+    [self.filterDistance setSelectedSegmentIndex:[[selectedValues objectAtIndex:0] integerValue]];
     [self.filterDistance setTitleTextAttributes:textAttributes forState:UIControlStateNormal];
     [self.filterDistance setTitleTextAttributes:textAttributes forState:UIControlStateSelected];
 
@@ -59,7 +62,7 @@
     //Component 3 - Star
     self.filterStar = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"4", @"5", @"All", nil]];
     [self.filterStar setFrame:frame];
-    [self.filterStar setSelectedSegmentIndex:2];
+    [self.filterStar setSelectedSegmentIndex:[[selectedValues objectAtIndex:1] integerValue]];
     [self.filterStar setTitleTextAttributes:textAttributes forState:UIControlStateNormal];
     [self.filterStar setTitleTextAttributes:textAttributes forState:UIControlStateSelected];
 
@@ -68,7 +71,7 @@
     //Component 4 - Price
     self.filterPrice = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"$$", @"$$$", @"All", nil]];
     [self.filterPrice setFrame:frame];
-    [self.filterPrice setSelectedSegmentIndex:2];
+    [self.filterPrice setSelectedSegmentIndex:[[selectedValues objectAtIndex:2] integerValue]];
     [self.filterPrice setTitleTextAttributes:textAttributes forState:UIControlStateNormal];
     [self.filterPrice setTitleTextAttributes:textAttributes forState:UIControlStateSelected];
 
@@ -90,16 +93,16 @@
     return self.filterHotelName.text;
 }
 
-- (NSInteger)distanceFromSelectedLocationFilterValue {
-    return [self.filterDistance selectedSegmentIndex];
+- (NSNumber *)distanceFromSelectedLocationFilterValue {
+    return [NSNumber numberWithInteger:[self.filterDistance selectedSegmentIndex]];
 }
 
-- (NSInteger)starRatingFilterValue {
-    return [self.filterStar selectedSegmentIndex];
+- (NSNumber *)starRatingFilterValue {
+    return [NSNumber numberWithInteger:[self.filterStar selectedSegmentIndex]];
 }
 
-- (NSInteger)priceFilterValue {
-    return [self.filterPrice selectedSegmentIndex];
+- (NSNumber *)priceFilterValue {
+    return [NSNumber numberWithInteger: [self.filterPrice selectedSegmentIndex]];
 }
 
 @end

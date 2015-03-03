@@ -11,6 +11,7 @@
 @protocol EANFilterDelegate <NSObject>
 
 - (void)filtersSelected;
+- (NSArray *)getCurrentFilterValues;
 
 @end
 
@@ -19,7 +20,7 @@
 @property (nonatomic, weak) id <EANFilterDelegate> delegate;
 
 - (NSString *)hotelNameFilterValue;
-- (NSInteger)starRatingFilterValue;
-- (NSInteger)distanceFromSelectedLocationFilterValue;
-- (NSInteger)priceFilterValue;
+- (NSNumber *)starRatingFilterValue;
+- (NSNumber *)distanceFromSelectedLocationFilterValue;
+- (NSNumber *)priceFilterValue;
 @end
