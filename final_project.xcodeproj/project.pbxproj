@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1E9D6BE1DB8ED7BB7992D172 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A15DB5A5C9010082D5D14627 /* libPods.a */; };
+		81010B8B1AA7B91100E95C9F /* CKCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 81010B881AA7B91100E95C9F /* CKCalendarView.m */; };
+		81010B8C1AA7B91100E95C9F /* EANCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 81010B8A1AA7B91100E95C9F /* EANCalendar.m */; };
 		814D916A1AA2965F00835B55 /* EANPopOver.m in Sources */ = {isa = PBXBuildFile; fileRef = 814D91671AA2965F00835B55 /* EANPopOver.m */; };
 		814D916B1AA2965F00835B55 /* EANPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 814D91691AA2965F00835B55 /* EANPicker.m */; };
 		814D91711AA2C53600835B55 /* EANFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 814D91701AA2C53600835B55 /* EANFilter.m */; };
@@ -40,6 +42,10 @@
 
 /* Begin PBXFileReference section */
 		526CC0D45EB90DD41861D021 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		81010B871AA7B91100E95C9F /* CKCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKCalendarView.h; sourceTree = "<group>"; };
+		81010B881AA7B91100E95C9F /* CKCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKCalendarView.m; sourceTree = "<group>"; };
+		81010B891AA7B91100E95C9F /* EANCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EANCalendar.h; sourceTree = "<group>"; };
+		81010B8A1AA7B91100E95C9F /* EANCalendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EANCalendar.m; sourceTree = "<group>"; };
 		814D91661AA2965F00835B55 /* EANPopOver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EANPopOver.h; sourceTree = "<group>"; };
 		814D91671AA2965F00835B55 /* EANPopOver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EANPopOver.m; sourceTree = "<group>"; };
 		814D91681AA2965F00835B55 /* EANPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EANPicker.h; sourceTree = "<group>"; };
@@ -183,6 +189,10 @@
 		81C040181A9FE1EC000347E1 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				81010B871AA7B91100E95C9F /* CKCalendarView.h */,
+				81010B881AA7B91100E95C9F /* CKCalendarView.m */,
+				81010B891AA7B91100E95C9F /* EANCalendar.h */,
+				81010B8A1AA7B91100E95C9F /* EANCalendar.m */,
 				81B375941AA3C4C4000F4507 /* EANAutoCompleteView.h */,
 				81B375951AA3C4C4000F4507 /* EANAutoCompleteView.m */,
 				814D91781AA2E28C00835B55 /* EANSort.h */,
@@ -369,6 +379,8 @@
 				814FA1441A9A62F500D0266A /* main.m in Sources */,
 				81C040161A9FD6C1000347E1 /* BookingViewController.m in Sources */,
 				814D91711AA2C53600835B55 /* EANFilter.m in Sources */,
+				81010B8C1AA7B91100E95C9F /* EANCalendar.m in Sources */,
+				81010B8B1AA7B91100E95C9F /* CKCalendarView.m in Sources */,
 				814D916B1AA2965F00835B55 /* EANPicker.m in Sources */,
 				81C03F9A1A9EB32F000347E1 /* HotelViewController.m in Sources */,
 				81C040131A9F89B3000347E1 /* HotelDetailViewController.m in Sources */,

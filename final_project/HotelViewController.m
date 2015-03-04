@@ -172,6 +172,16 @@
     if (self.popover)
         [self.popover dismissPopOver];
     
+    self.popover = [[EANCalendar alloc] initWithFrame:CGRectMake(40, 0, self.view.frame.size.width-80, 300) forTarget:self.view withReferenceFrameToolBarHeight:42.0];
+    ((EANCalendar *)self.popover).delegate = self;
+    self.popover.popoverDelegate = self;
+    [self.popover setTitle:@"Select Dates"];
+
+    [self displayPopOver];
+}
+
+- (void)datesSelected {
+    
 }
 
 //-------Method related to Picker View for Adult selection------//
@@ -183,7 +193,7 @@
     if (self.popover)
         [self.popover dismissPopOver];
     
-    self.popover = [[EANPicker alloc] initWithFrame:CGRectMake(10, 0, self.view.frame.size.width-20, 300) forTarget:self.view withReferenceFrameToolBarHeight:42.0];
+    self.popover = [[EANPicker alloc] initWithFrame:CGRectMake(40, 0, self.view.frame.size.width-80, 300) forTarget:self.view withReferenceFrameToolBarHeight:42.0];
     ((EANPicker *)self.popover).delegate = self;
     self.popover.popoverDelegate = self;
     [self.popover setTitle:@"Guest Selection"];
