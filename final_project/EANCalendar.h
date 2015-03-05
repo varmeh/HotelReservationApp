@@ -11,7 +11,7 @@
 
 @protocol EANCalendatDelegate <NSObject>
 
-- (void)datesSelected;
+- (void)datesSelected:(NSDate *)checkIn withCheckOutDate:(NSDate *)checkOut;
 
 @end
 

@@ -180,8 +180,8 @@
     [self displayPopOver];
 }
 
-- (void)datesSelected {
-    
+- (void)datesSelected:(NSDate *)checkIn withCheckOutDate:(NSDate *)checkOut {
+    //Set dates accordingly
 }
 
 //-------Method related to Picker View for Adult selection------//
