@@ -8,7 +8,7 @@
 
 #import "EANPopOver.h"
 
-@protocol EANFilterDelegate <NSObject>
+@protocol EANFilterDelegate <EANPopoverDelegate>
 
 - (void)filtersSelected;
 - (NSArray *)getCurrentFilterValues;

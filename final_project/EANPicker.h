@@ -8,7 +8,7 @@
 
 #import "EANPopOver.h"
 
-@protocol EANPickerDelegate <NSObject>
+@protocol EANPickerDelegate <EANPopoverDelegate>
 
 - (void)selectionCompleteForPicker;
 - (NSInteger) getSelectedNumberOfAdults;

@@ -16,6 +16,8 @@
 
 @implementation EANPicker
 
+@dynamic delegate;
+
 - (instancetype)initWithFrame:(CGRect)frame forTarget:(UIView *)parentView withReferenceFrameToolBarHeight:(CGFloat)toolbarHeight {
     self = [super initWithFrame:frame forTarget:parentView withReferenceFrameToolBarHeight:toolbarHeight];
     return self;

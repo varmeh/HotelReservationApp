@@ -9,7 +9,7 @@
 #import "EANPopOver.h"
 #import "CKCalendarView.h"
 
-@protocol EANCalendatDelegate <NSObject>
+@protocol EANCalendatDelegate <EANPopoverDelegate>
 
 - (void)datesSelected:(NSDate *)checkIn withCheckOutDate:(NSDate *)checkOut;
 

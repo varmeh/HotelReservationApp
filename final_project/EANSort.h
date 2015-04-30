@@ -8,7 +8,7 @@
 
 #import "EANPopOver.h"
 
-@protocol EANSortDelegate <NSObject>
+@protocol EANSortDelegate <EANPopoverDelegate>
 
 - (void)sortCriteriaSelected;
 - (NSString *)getCurrentSortCriteria;

@@ -29,7 +29,6 @@
     
     popoverView = [self initWithFrame:popoverFrame];
     
-//    popOverMainScreenView = [[UIView alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
     popOverMainScreenView = [[UIView alloc] initWithFrame:CGRectMake(parentView.frame.origin.x, parentView.frame.origin.y, parentView.frame.size.width, parentView.frame.size.height - toolbarHeight)];
     [popOverMainScreenView addSubview:popoverView];
     
@@ -85,6 +84,7 @@
     [self dismissPopOver];
 }
 
+//Set title of Popover View
 - (void)setTitle: (NSString *)title {
     [barTitle setTitle: title];
 }
@@ -95,7 +95,7 @@
     [self setAlpha:0.0];
     [popoverView removeFromSuperview];
     [popOverMainScreenView removeFromSuperview];
-    [self.popoverDelegate setPopoverToNil];
+    [self.delegate setPopoverToNil];
 }
 
 - (void)showAnimated {

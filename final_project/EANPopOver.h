@@ -23,7 +23,7 @@
 - (void)dismissPopOver;
 - (void)showAnimated;
 
-@property(nonatomic, weak) id <EANPopoverDelegate>popoverDelegate;
+@property(nonatomic, weak) id <EANPopoverDelegate>delegate;
 
 //Override this function in all child classes for delegate implementation.
 //Call this super function once delegation completed.

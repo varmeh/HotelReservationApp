@@ -174,7 +174,6 @@
     
     self.popover = [[EANCalendar alloc] initWithFrame:CGRectMake(40, 0, self.view.frame.size.width-80, 300) forTarget:self.view withReferenceFrameToolBarHeight:42.0];
     ((EANCalendar *)self.popover).delegate = self;
-    self.popover.popoverDelegate = self;
     [self.popover setTitle:@"Select Dates"];
 
     [self displayPopOver];
@@ -195,7 +194,6 @@
     
     self.popover = [[EANPicker alloc] initWithFrame:CGRectMake(40, 0, self.view.frame.size.width-80, 300) forTarget:self.view withReferenceFrameToolBarHeight:42.0];
     ((EANPicker *)self.popover).delegate = self;
-    self.popover.popoverDelegate = self;
     [self.popover setTitle:@"Guest Selection"];
     
     [self displayPopOver];
@@ -236,8 +234,7 @@
         [self.popover dismissPopOver];
         
     self.popover = [[EANSort alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 250)/2, 0, 150, 150) forTarget:self.view withReferenceFrameToolBarHeight:42.0];
-    ((EANSort *)self.popover).delegate = self;
-    self.popover.popoverDelegate = self;
+    self.popover.delegate = self;
     [self.popover setTitle:@"Sort Hotels"];
     
     [self displayPopOver];
@@ -261,7 +258,6 @@
     
     self.popover = [[EANFilter alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 250)/2, 0, 250, 250) forTarget:self.view withReferenceFrameToolBarHeight:42.0];
     ((EANFilter *)self.popover).delegate = self;
-    self.popover.popoverDelegate = self;
     [self.popover setTitle:@"Filter Hotels"];
     [self displayPopOver];
 }
