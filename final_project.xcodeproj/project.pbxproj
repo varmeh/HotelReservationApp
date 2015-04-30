@@ -135,12 +135,12 @@
 		814FA1401A9A62F500D0266A /* final_project */ = {
 			isa = PBXGroup;
 			children = (
+				81C040191A9FE203000347E1 /* Model */,
+				81C040181A9FE1EC000347E1 /* View */,
 				81C040171A9FE1D6000347E1 /* Controller */,
-				81C040191A9FE203000347E1 /* BackendFramework */,
 				814FA1451A9A62F500D0266A /* AppDelegate.h */,
 				814FA1461A9A62F500D0266A /* AppDelegate.m */,
 				81C0401A1A9FE22A000347E1 /* Interface */,
-				81C040181A9FE1EC000347E1 /* View */,
 				814FA14E1A9A62F500D0266A /* Images.xcassets */,
 				814FA1411A9A62F500D0266A /* Supporting Files */,
 			);
@@ -209,13 +209,13 @@
 			name = View;
 			sourceTree = "<group>";
 		};
-		81C040191A9FE203000347E1 /* BackendFramework */ = {
+		81C040191A9FE203000347E1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				8185B3D01A9D934000729A09 /* EANWebFramework.h */,
 				8185B3D11A9D934000729A09 /* EANWebFramework.m */,
 			);
-			name = BackendFramework;
+			name = Model;
 			sourceTree = "<group>";
 		};
 		81C0401A1A9FE22A000347E1 /* Interface */ = {
