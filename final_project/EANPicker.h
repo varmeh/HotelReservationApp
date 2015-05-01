@@ -9,7 +9,7 @@
 #import "EANPopOver.h"
 
 @protocol EANPickerDelegate <EANPopoverDelegate>
-
+//required functions - app crashes, if any of those left out.
 - (void)selectionCompleteForPicker;
 - (NSInteger) getSelectedNumberOfAdults;
 - (NSInteger) getSelectedNumberOfChildren;

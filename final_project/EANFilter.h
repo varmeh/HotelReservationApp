@@ -6,6 +6,14 @@
 //  Copyright (c) 2015 MAC. All rights reserved.
 //
 
+/*
+ This view would provide user with options to filter the output his seach.
+ Filter options
+ a. Name
+ b. Rating
+ c. Distance
+ d. Price
+*/
 #import "EANPopOver.h"
 
 @protocol EANFilterDelegate <EANPopoverDelegate>

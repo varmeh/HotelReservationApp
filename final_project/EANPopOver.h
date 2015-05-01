@@ -6,6 +6,10 @@
 //  Copyright (c) 2015 MAC. All rights reserved.
 //
 
+/*
+ This is the base class for filter, sort, guest selection and calender pop up.
+ All pop up and selection functionality is common to all above child classes and thus, implemented in this base class.
+*/
 #import <UIKit/UIKit.h>
 
 @protocol EANPopoverDelegate <NSObject>
@@ -13,7 +17,6 @@
 - (void)setPopoverToNil;
 
 @end
-
 
 @interface EANPopOver : UIView <UIToolbarDelegate>
 

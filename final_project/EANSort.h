@@ -6,6 +6,13 @@
 //  Copyright (c) 2015 MAC. All rights reserved.
 //
 
+/*
+ This method provides users with output sorting options.
+ Currently, supported sorting options are:
+ a. Popularity
+ b. Price
+ c. Distance
+*/
 #import "EANPopOver.h"
 
 @protocol EANSortDelegate <EANPopoverDelegate>

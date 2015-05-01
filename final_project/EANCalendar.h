@@ -6,6 +6,9 @@
 //  Copyright (c) 2015 MAC. All rights reserved.
 //
 
+/*
+ This class represents Custom CKCalender for date selection
+*/
 #import "EANPopOver.h"
 #import "CKCalendarView.h"
 

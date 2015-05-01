@@ -13,7 +13,7 @@
 #import "EANAutoCompleteView.h"
 #import "EANCalendar.h"
 
-@interface HotelViewController : UIViewController <UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource, EANPickerDelegate, EANFilterDelegate, EANSortDelegate, EANAutoCompleteViewDelegate, EANPopoverDelegate, EANCalendatDelegate>
+@interface HotelViewController : UIViewController <UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource, EANPickerDelegate, EANFilterDelegate, EANSortDelegate, EANAutoCompleteViewDelegate, EANCalendatDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollBarOutlet;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolBarHotelScreenOutlet;

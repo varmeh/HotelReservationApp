@@ -8,33 +8,38 @@
 
 #import "EANPopOver.h"
 
-#define HEIGHT_OF_POPOVER_TABBAR        30
+#define HEIGHT_OF_POPOVER_TABBAR        30 //used to determine the height of subview Tabbar.
+
 @interface EANPopOver ()
 {
+    //Private variables.
     UIBarButtonItem *barTitle;
     UIView *popOverMainScreenView;
     EANPopOver *popoverView;
 }
-
+//Private methods
 - (void)addSelectionBarAtTop;
 @end
 
-
-
-
 @implementation EANPopOver
 
+//Custom initialization method for all it's subclasses.
+//Pending - Blur effect. Add to popOverMainScreenView.
 - (instancetype)initWithFrame:(CGRect)frame forTarget:(UIView *)parentView withReferenceFrameToolBarHeight:(CGFloat)toolbarHeight{
+    //All pop up would be from bottom of screen. So, Y of pop up should be height of pop up + toolbarHeihght subtracted from parent view frame.
     CGRect popoverFrame = CGRectMake(frame.origin.x, parentView.frame.size.height - (frame.size.height + toolbarHeight + 2), frame.size.width, frame.size.height);
     
+    //Initializing pop over view.
     popoverView = [self initWithFrame:popoverFrame];
-    
+
+    //Adding a empty view layer between main view & subview.
+    //This ensures that all events are captured and managed by child and not passed on directly to view at the back.
     popOverMainScreenView = [[UIView alloc] initWithFrame:CGRectMake(parentView.frame.origin.x, parentView.frame.origin.y, parentView.frame.size.width, parentView.frame.size.height - toolbarHeight)];
     [popOverMainScreenView addSubview:popoverView];
     
     [parentView addSubview:popOverMainScreenView];
     
-    //Adding Tap Gesture to sc
+    //Adding Tap Gesture to layer view. It provides functionality for removal pop up on screen touch.
     UITapGestureRecognizer *dismissPopover = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissPopOver)];
     dismissPopover.numberOfTapsRequired = 1;
     dismissPopover.numberOfTouchesRequired = 1;
@@ -43,7 +48,7 @@
     return popoverView;
 }
 
-
+//Standard initialization method with custom initialization.
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
@@ -98,6 +103,7 @@
     [self.delegate setPopoverToNil];
 }
 
+//displays pop up with animation.
 - (void)showAnimated {
     [UIView animateWithDuration:0.2 animations:^{
         [self setAlpha:1.0];

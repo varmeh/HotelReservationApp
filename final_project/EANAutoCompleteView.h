@@ -5,7 +5,9 @@
 //  Created by iOS on 3/1/15.
 //  Copyright (c) 2015 MAC. All rights reserved.
 //
-
+/*
+ This class provides user autocomplete feature for location input using Google location services.
+*/
 #import <UIKit/UIKit.h>
 
 @protocol EANAutoCompleteViewDelegate <NSObject>
