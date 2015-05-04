@@ -28,6 +28,8 @@
 		81C0400B1A9F7211000347E1 /* HotelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81C040091A9F7211000347E1 /* HotelTableViewCell.xib */; };
 		81C040131A9F89B3000347E1 /* HotelDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C040121A9F89B3000347E1 /* HotelDetailViewController.m */; };
 		81C040161A9FD6C1000347E1 /* BookingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C040151A9FD6C1000347E1 /* BookingViewController.m */; };
+		B99619271AF7A62B0048024B /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B99619261AF7A62B0048024B /* NetworkManager.m */; };
+		B996192A1AF7B34A0048024B /* DecodingLocationAutoCompleteData.m in Sources */ = {isa = PBXBuildFile; fileRef = B99619291AF7B34A0048024B /* DecodingLocationAutoCompleteData.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +82,10 @@
 		81C040141A9FD6C1000347E1 /* BookingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookingViewController.h; sourceTree = "<group>"; };
 		81C040151A9FD6C1000347E1 /* BookingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookingViewController.m; sourceTree = "<group>"; };
 		A15DB5A5C9010082D5D14627 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B99619251AF7A62B0048024B /* NetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkManager.h; sourceTree = "<group>"; };
+		B99619261AF7A62B0048024B /* NetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkManager.m; sourceTree = "<group>"; };
+		B99619281AF7B34A0048024B /* DecodingLocationAutoCompleteData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DecodingLocationAutoCompleteData.h; sourceTree = "<group>"; };
+		B99619291AF7B34A0048024B /* DecodingLocationAutoCompleteData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DecodingLocationAutoCompleteData.m; sourceTree = "<group>"; };
 		F6E3A9E4FC882462204C13AF /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -212,6 +218,10 @@
 		81C040191A9FE203000347E1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B99619281AF7B34A0048024B /* DecodingLocationAutoCompleteData.h */,
+				B99619291AF7B34A0048024B /* DecodingLocationAutoCompleteData.m */,
+				B99619251AF7A62B0048024B /* NetworkManager.h */,
+				B99619261AF7A62B0048024B /* NetworkManager.m */,
 				8185B3D01A9D934000729A09 /* EANWebFramework.h */,
 				8185B3D11A9D934000729A09 /* EANWebFramework.m */,
 			);
@@ -384,8 +394,10 @@
 				814D916B1AA2965F00835B55 /* EANPicker.m in Sources */,
 				81C03F9A1A9EB32F000347E1 /* HotelViewController.m in Sources */,
 				81C040131A9F89B3000347E1 /* HotelDetailViewController.m in Sources */,
+				B996192A1AF7B34A0048024B /* DecodingLocationAutoCompleteData.m in Sources */,
 				814D916A1AA2965F00835B55 /* EANPopOver.m in Sources */,
 				81C0400A1A9F7211000347E1 /* HotelTableViewCell.m in Sources */,
+				B99619271AF7A62B0048024B /* NetworkManager.m in Sources */,
 				814D917A1AA2E28C00835B55 /* EANSort.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

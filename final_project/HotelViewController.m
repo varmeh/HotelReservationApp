@@ -9,7 +9,6 @@
 #import "HotelViewController.h"
 #import <MapKit/MapKit.h>
 #import "HotelTableViewCell.h"
-#import <AFNetworking.h>
 
 @interface HotelViewController ()
 {
@@ -417,30 +416,16 @@
 //-------Method related to Search & AutoComplete------//
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    NSString *searchURL = [autocompleteBaseURL stringByAppendingString:searchText];
+    //Use Google location service to facilitate user.
+    DecodingLocationAutoCompleteData *locationService = [DecodingLocationAutoCompleteData sharedLocationService];
+    locationService.delegate = self;
     
-    // this line of code avoids invalid parameter url string
-    NSString *encoded = [searchURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:encoded parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        jsonAutocompleteData = (NSDictionary *)responseObject;
-        [self parseAutoCompleteData];
-    }failure: ^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"%@",[error localizedDescription]);
-    }];
+    //Location service appends location service base url to user input to facilitate location search.
+    [locationService setLocationAutoCompleteDataForText:searchText inDataSource:self.placeList];
 }
 
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    
-}
-
-- (void) parseAutoCompleteData {
-    [self.placeList removeAllObjects];
-    for (NSDictionary *place in jsonAutocompleteData[@"predictions"]) {
-        NSString *newPlace = place[@"description"];
-        [self.placeList addObject:newPlace];
-    }
+-(void)locationServiceSuccessful {
+    //Upload Table
     [searchTable reloadAutoCompleteData];
 }
 
@@ -449,8 +434,7 @@
 }
 
 - (void)userSelectedAutoCompleteResult:(NSString *)string {
+    //Set selection in search bar.
     [searchBar setText:string];
-    
-    //Add search request here.
 }
 @end
