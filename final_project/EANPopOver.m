@@ -108,7 +108,7 @@
     //Create weak reference for block
     __weak EANPopOver *weakRef = self;
     [UIView animateWithDuration:0.2 animations:^{
-        if (!weakRef) {
+        if (weakRef) {
             [weakRef setAlpha:1.0];
         }
     }];
