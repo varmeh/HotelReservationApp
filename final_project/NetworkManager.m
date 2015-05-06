@@ -8,6 +8,7 @@
 
 #import "NetworkManager.h"
 #import <AFNetworking.h>
+#import <UIImageView+AFNetworking.h>
 
 @interface NetworkManager ()
 
@@ -45,16 +46,27 @@
     // this line of code avoids invalid parameter url string
     NSString *encoded = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
+    __weak NetworkManager* weakSelf = self; //weak reference to self to avoid retain cycle
+    
     //Using GET method to recieve JSON data from web service.
     [[AFHTTPSessionManager manager] GET:encoded parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject){
         //Delegate success implementation to caller.
-        [self.delegate dataFetchedSuccessfull:responseObject];
+        [weakSelf.delegate dataFetchedSuccessfull:responseObject];
         
     }failure:^(NSURLSessionDataTask *task, NSError *error){
+        __strong NetworkManager *strongSelf = weakSelf; //strong block reference to avoid loss of reference
         //Failure message alert is optional.
-        if ([self.delegate respondsToSelector:@selector(dataFetchFailedWithError:)]) {
-            [self.delegate dataFetchFailedWithError:error];
+        if (strongSelf != nil) {
+            if ([self.delegate respondsToSelector:@selector(dataFetchFailedWithError:)]) {
+                [self.delegate dataFetchFailedWithError:error];
+            }            
         }
     }];
+}
+
+- (void)setImageWithURL:(NSString *)url {
+
+    //Set image using AFNetworking category.
+    [[NetworkManager sharedInstance] setImageWithURL:url];
 }
 @end

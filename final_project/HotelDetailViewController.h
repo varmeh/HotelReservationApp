@@ -11,3 +11,4 @@
 @interface HotelDetailViewController : UIViewController <UIScrollViewDelegate>
 
 @end
+    

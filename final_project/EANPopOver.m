@@ -105,8 +105,12 @@
 
 //displays pop up with animation.
 - (void)showAnimated {
+    //Create weak reference for block
+    __weak EANPopOver *weakRef = self;
     [UIView animateWithDuration:0.2 animations:^{
-        [self setAlpha:1.0];
+        if (!weakRef) {
+            [weakRef setAlpha:1.0];
+        }
     }];
 }
 
