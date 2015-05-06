@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 MAC. All rights reserved.
 //
 
-#import "HotelViewController.h"
 #import <MapKit/MapKit.h>
+#import "HotelViewController.h"
 #import "HotelTableViewCell.h"
 
 @interface HotelViewController ()
@@ -48,7 +48,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     isMapView = NO; //Default view is list view. User could switch between list and map views of hotels.
     
     //Configure Navigation bar with Search Bar, Dates Selection and Guest Selection Button
@@ -88,6 +87,10 @@
     
     //Setting default criteria for sorting
     self.sortCriteria = @"Popularity";
+    
+    //Initiate Location Manager object
+    [LocationManager sharedLocationManager].delegate = self;
+    [[LocationManager sharedLocationManager] initiateLocationServices];
 }
 
 /*  
@@ -436,5 +439,12 @@
 - (void)userSelectedAutoCompleteResult:(NSString *)string {
     //Set selection in search bar.
     [searchBar setText:string];
+}
+
+- (void)userCurrentLocation:(CLLocation *)currentLocation inString:(NSString *)location {
+    //Setting location string in search bar
+    [searchBar setText:location];
+    
+    //Fetch hotels for this location
 }
 @end

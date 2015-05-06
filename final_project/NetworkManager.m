@@ -56,7 +56,7 @@
     }failure:^(NSURLSessionDataTask *task, NSError *error){
         __strong NetworkManager *strongSelf = weakSelf; //strong block reference to avoid loss of reference
         //Failure message alert is optional.
-        if (strongSelf != nil) {
+        if (strongSelf) {
             if ([self.delegate respondsToSelector:@selector(dataFetchFailedWithError:)]) {
                 [self.delegate dataFetchFailedWithError:error];
             }            

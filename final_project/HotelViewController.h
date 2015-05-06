@@ -13,8 +13,9 @@
 #import "EANAutoCompleteView.h"
 #import "EANCalendar.h"
 #import "DecodingLocationAutoCompleteData.h"
+#import "LocationManager.h"
 
-@interface HotelViewController : UIViewController <UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource, EANPickerDelegate, EANFilterDelegate, EANSortDelegate, EANAutoCompleteViewDelegate, EANCalendatDelegate, DecodingLocationAutoCompleteDataDelegate>
+@interface HotelViewController : UIViewController <UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource, EANPickerDelegate, EANFilterDelegate, EANSortDelegate, EANAutoCompleteViewDelegate, EANCalendatDelegate, DecodingLocationAutoCompleteDataDelegate, LocationManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollBarOutlet;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolBarHotelScreenOutlet;

@@ -23,5 +23,5 @@
 
 +(instancetype)sharedInstance;
 -(void)getData:(NSString *)url withParameters: (id)parameters;
-
+-(void)setImageWithURL:(NSString *)url;
 @end

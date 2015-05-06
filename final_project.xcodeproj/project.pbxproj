@@ -30,6 +30,8 @@
 		81C040161A9FD6C1000347E1 /* BookingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C040151A9FD6C1000347E1 /* BookingViewController.m */; };
 		B99619271AF7A62B0048024B /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B99619261AF7A62B0048024B /* NetworkManager.m */; };
 		B996192A1AF7B34A0048024B /* DecodingLocationAutoCompleteData.m in Sources */ = {isa = PBXBuildFile; fileRef = B99619291AF7B34A0048024B /* DecodingLocationAutoCompleteData.m */; };
+		B996192C1AF7FAD60048024B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B996192B1AF7FAD60048024B /* CoreLocation.framework */; };
+		B996192F1AF800920048024B /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B996192E1AF800920048024B /* LocationManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +88,9 @@
 		B99619261AF7A62B0048024B /* NetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkManager.m; sourceTree = "<group>"; };
 		B99619281AF7B34A0048024B /* DecodingLocationAutoCompleteData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DecodingLocationAutoCompleteData.h; sourceTree = "<group>"; };
 		B99619291AF7B34A0048024B /* DecodingLocationAutoCompleteData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DecodingLocationAutoCompleteData.m; sourceTree = "<group>"; };
+		B996192B1AF7FAD60048024B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		B996192D1AF800920048024B /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
+		B996192E1AF800920048024B /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 		F6E3A9E4FC882462204C13AF /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -94,6 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B996192C1AF7FAD60048024B /* CoreLocation.framework in Frameworks */,
 				81C03FD01A9EFACF000347E1 /* MapKit.framework in Frameworks */,
 				1E9D6BE1DB8ED7BB7992D172 /* libPods.a in Frameworks */,
 			);
@@ -218,6 +224,8 @@
 		81C040191A9FE203000347E1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B996192D1AF800920048024B /* LocationManager.h */,
+				B996192E1AF800920048024B /* LocationManager.m */,
 				B99619281AF7B34A0048024B /* DecodingLocationAutoCompleteData.h */,
 				B99619291AF7B34A0048024B /* DecodingLocationAutoCompleteData.m */,
 				B99619251AF7A62B0048024B /* NetworkManager.h */,
@@ -241,6 +249,7 @@
 		EB3AC855F0D5924035CC6FA2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B996192B1AF7FAD60048024B /* CoreLocation.framework */,
 				81C03FCF1A9EFACF000347E1 /* MapKit.framework */,
 				A15DB5A5C9010082D5D14627 /* libPods.a */,
 			);
@@ -391,6 +400,7 @@
 				814D91711AA2C53600835B55 /* EANFilter.m in Sources */,
 				81010B8C1AA7B91100E95C9F /* EANCalendar.m in Sources */,
 				81010B8B1AA7B91100E95C9F /* CKCalendarView.m in Sources */,
+				B996192F1AF800920048024B /* LocationManager.m in Sources */,
 				814D916B1AA2965F00835B55 /* EANPicker.m in Sources */,
 				81C03F9A1A9EB32F000347E1 /* HotelViewController.m in Sources */,
 				81C040131A9F89B3000347E1 /* HotelDetailViewController.m in Sources */,
@@ -522,6 +532,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = final_project/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -533,6 +544,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = final_project/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
