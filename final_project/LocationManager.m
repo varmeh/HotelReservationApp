@@ -107,15 +107,13 @@
     
     //if location is not empty
     if (location) {
-        //CLGeocoder is used for forward encoding of lat/long to location
+        //CLGeocoder is used for reverse encoding of lat/long to location
         CLGeocoder *geoCoder = [[CLGeocoder alloc] init];
         
         __weak LocationManager *weakSelf = self;
         [geoCoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error){
             //map weakself to strong reference to ensure accessibility through out block
             __strong LocationManager *strongSelf = weakSelf;
-            
-            NSLog(@"Location : %@",placemarks);
 
             //If no error and placemarks is not empty
             if (!error && ([placemarks count] > 0)) {

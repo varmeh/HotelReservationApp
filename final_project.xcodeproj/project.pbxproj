@@ -28,6 +28,11 @@
 		81C0400B1A9F7211000347E1 /* HotelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81C040091A9F7211000347E1 /* HotelTableViewCell.xib */; };
 		81C040131A9F89B3000347E1 /* HotelDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C040121A9F89B3000347E1 /* HotelDetailViewController.m */; };
 		81C040161A9FD6C1000347E1 /* BookingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C040151A9FD6C1000347E1 /* BookingViewController.m */; };
+		B91B67B71AFBA623004BFCD0 /* HotelModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B91B67B61AFBA623004BFCD0 /* HotelModel.m */; };
+		B91B67BA1AFBB224004BFCD0 /* RoomDetailsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B91B67B91AFBB224004BFCD0 /* RoomDetailsModel.m */; };
+		B91B67BD1AFBB68A004BFCD0 /* RateInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B91B67BC1AFBB68A004BFCD0 /* RateInfoModel.m */; };
+		B91B67C01AFBC40C004BFCD0 /* CharageableRateInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B91B67BF1AFBC40C004BFCD0 /* CharageableRateInfoModel.m */; };
+		B91B67C31AFBC643004BFCD0 /* HotelList.m in Sources */ = {isa = PBXBuildFile; fileRef = B91B67C21AFBC643004BFCD0 /* HotelList.m */; };
 		B99619271AF7A62B0048024B /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B99619261AF7A62B0048024B /* NetworkManager.m */; };
 		B996192A1AF7B34A0048024B /* DecodingLocationAutoCompleteData.m in Sources */ = {isa = PBXBuildFile; fileRef = B99619291AF7B34A0048024B /* DecodingLocationAutoCompleteData.m */; };
 		B996192C1AF7FAD60048024B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B996192B1AF7FAD60048024B /* CoreLocation.framework */; };
@@ -84,6 +89,16 @@
 		81C040141A9FD6C1000347E1 /* BookingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookingViewController.h; sourceTree = "<group>"; };
 		81C040151A9FD6C1000347E1 /* BookingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookingViewController.m; sourceTree = "<group>"; };
 		A15DB5A5C9010082D5D14627 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B91B67B51AFBA623004BFCD0 /* HotelModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotelModel.h; sourceTree = "<group>"; };
+		B91B67B61AFBA623004BFCD0 /* HotelModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotelModel.m; sourceTree = "<group>"; };
+		B91B67B81AFBB224004BFCD0 /* RoomDetailsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomDetailsModel.h; sourceTree = "<group>"; };
+		B91B67B91AFBB224004BFCD0 /* RoomDetailsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomDetailsModel.m; sourceTree = "<group>"; };
+		B91B67BB1AFBB68A004BFCD0 /* RateInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RateInfoModel.h; sourceTree = "<group>"; };
+		B91B67BC1AFBB68A004BFCD0 /* RateInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RateInfoModel.m; sourceTree = "<group>"; };
+		B91B67BE1AFBC40C004BFCD0 /* CharageableRateInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharageableRateInfoModel.h; sourceTree = "<group>"; };
+		B91B67BF1AFBC40C004BFCD0 /* CharageableRateInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharageableRateInfoModel.m; sourceTree = "<group>"; };
+		B91B67C11AFBC643004BFCD0 /* HotelList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotelList.h; sourceTree = "<group>"; };
+		B91B67C21AFBC643004BFCD0 /* HotelList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotelList.m; sourceTree = "<group>"; };
 		B99619251AF7A62B0048024B /* NetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkManager.h; sourceTree = "<group>"; };
 		B99619261AF7A62B0048024B /* NetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkManager.m; sourceTree = "<group>"; };
 		B99619281AF7B34A0048024B /* DecodingLocationAutoCompleteData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DecodingLocationAutoCompleteData.h; sourceTree = "<group>"; };
@@ -226,6 +241,16 @@
 			children = (
 				B996192D1AF800920048024B /* LocationManager.h */,
 				B996192E1AF800920048024B /* LocationManager.m */,
+				B91B67B51AFBA623004BFCD0 /* HotelModel.h */,
+				B91B67B61AFBA623004BFCD0 /* HotelModel.m */,
+				B91B67B81AFBB224004BFCD0 /* RoomDetailsModel.h */,
+				B91B67BE1AFBC40C004BFCD0 /* CharageableRateInfoModel.h */,
+				B91B67C11AFBC643004BFCD0 /* HotelList.h */,
+				B91B67C21AFBC643004BFCD0 /* HotelList.m */,
+				B91B67BF1AFBC40C004BFCD0 /* CharageableRateInfoModel.m */,
+				B91B67B91AFBB224004BFCD0 /* RoomDetailsModel.m */,
+				B91B67BB1AFBB68A004BFCD0 /* RateInfoModel.h */,
+				B91B67BC1AFBB68A004BFCD0 /* RateInfoModel.m */,
 				B99619281AF7B34A0048024B /* DecodingLocationAutoCompleteData.h */,
 				B99619291AF7B34A0048024B /* DecodingLocationAutoCompleteData.m */,
 				B99619251AF7A62B0048024B /* NetworkManager.h */,
@@ -392,6 +417,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B91B67B71AFBA623004BFCD0 /* HotelModel.m in Sources */,
 				8185B3D21A9D934000729A09 /* EANWebFramework.m in Sources */,
 				81B375961AA3C4C4000F4507 /* EANAutoCompleteView.m in Sources */,
 				814FA1471A9A62F500D0266A /* AppDelegate.m in Sources */,
@@ -399,14 +425,18 @@
 				81C040161A9FD6C1000347E1 /* BookingViewController.m in Sources */,
 				814D91711AA2C53600835B55 /* EANFilter.m in Sources */,
 				81010B8C1AA7B91100E95C9F /* EANCalendar.m in Sources */,
+				B91B67BA1AFBB224004BFCD0 /* RoomDetailsModel.m in Sources */,
 				81010B8B1AA7B91100E95C9F /* CKCalendarView.m in Sources */,
 				B996192F1AF800920048024B /* LocationManager.m in Sources */,
 				814D916B1AA2965F00835B55 /* EANPicker.m in Sources */,
+				B91B67C31AFBC643004BFCD0 /* HotelList.m in Sources */,
 				81C03F9A1A9EB32F000347E1 /* HotelViewController.m in Sources */,
 				81C040131A9F89B3000347E1 /* HotelDetailViewController.m in Sources */,
 				B996192A1AF7B34A0048024B /* DecodingLocationAutoCompleteData.m in Sources */,
+				B91B67BD1AFBB68A004BFCD0 /* RateInfoModel.m in Sources */,
 				814D916A1AA2965F00835B55 /* EANPopOver.m in Sources */,
 				81C0400A1A9F7211000347E1 /* HotelTableViewCell.m in Sources */,
+				B91B67C01AFBC40C004BFCD0 /* CharageableRateInfoModel.m in Sources */,
 				B99619271AF7A62B0048024B /* NetworkManager.m in Sources */,
 				814D917A1AA2E28C00835B55 /* EANSort.m in Sources */,
 			);
